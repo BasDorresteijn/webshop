@@ -19,14 +19,16 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class DbManager {
+    private final String url = "jdbc:postgresql://localhost/webshop";
+    private final String username = "postgres";
+    private final String password = "postgres";
     
     ArrayList<Connection> connections = new ArrayList<>();
     
     public Connection getConnection() {
-        String url = "jdbc:postgresql://localhost/userdata";
         Connection conn;
         try {
-            conn = DriverManager.getConnection(url, "postgres", "postgres");
+            conn = DriverManager.getConnection(url, username, password);
             connections.add(conn);
             return conn;
         } catch (SQLException ex) {

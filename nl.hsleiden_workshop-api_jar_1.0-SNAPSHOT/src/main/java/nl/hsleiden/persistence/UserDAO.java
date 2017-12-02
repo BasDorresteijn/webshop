@@ -1,12 +1,10 @@
 package nl.hsleiden.persistence;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
@@ -20,88 +18,154 @@ import nl.hsleiden.model.User;
 @Singleton
 public class UserDAO
 {
-    private List<User> users;
     private DbManager dbManager;
     
     @Inject
     public UserDAO(DbManager dbManager)
     {
         this.dbManager = dbManager;
-        updateUsers();
     }
     
-    private void updateUsers() {
+    public ArrayList<User> getAll() {
         Connection conn = dbManager.getConnection();
-        
+        ArrayList<User> users;
         try {
-            ResultSet getshit = conn.prepareStatement("select * from userdata").executeQuery();
-            while(getshit.next()) {
-                User user1 = new User();
-                user1.setFullName(getshit.getString(1));
-                user1.setPostcode(getshit.getString(2));
-                user1.setStreetnumber(getshit.getString(3));
-                user1.setEmailAddress("first@user.com");
-                user1.setPassword("first");
-                user1.setRoles(new String[] { "GUEST", "ADMIN" });
-
-                User user2 = new User();
-                user2.setFullName(getshit.getString(1));
-                user2.setPostcode(getshit.getString(2));
-                user2.setStreetnumber(getshit.getString(3));
-                user2.setEmailAddress("second@user.com");
-                user2.setPassword("second");
-                user2.setRoles(new String[] { "GUEST" });
-                
-                users = new ArrayList<>();
-                users.add(user1);
-                users.add(user2);
+            users = new ArrayList<>();
+            ResultSet rs = conn.prepareStatement("select * from webshop_user").executeQuery();
+            while(rs.next()) {
+                User user = new User();
+                user.setFullName(rs.getString(1));
+                user.setPostcode(rs.getString(2));
+                user.setStreetnumber(rs.getString(3));
+                user.setEmailAddress(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                if(rs.getBoolean(6)) {
+                    user.setRoles(new String[] { "GUEST", "ADMIN" });
+                } else {
+                    user.setRoles(new String[] { "GUEST" });
+                }
+                users.add(user);
             }
+            return users;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         dbManager.closeConnection(conn);
+        return null;
     }
     
-    public List<User> getAll()
-    {
-        return users;
-    }
-    
-    public User get(int id)
-    {
-        try
-        {
-            return users.get(id);
+    public User get(String fullName) {
+        Connection conn = dbManager.getConnection();
+        try {
+            User user = new User();
+            PreparedStatement getUser = conn.prepareStatement("select * from webshop_user where fullname = ? ");
+            getUser.setString(1, fullName);
+            ResultSet rs = getUser.executeQuery();
+            while(rs.next()) {
+                user.setFullName(rs.getString(1));
+                user.setPostcode(rs.getString(2));
+                user.setStreetnumber(rs.getString(3));
+                user.setEmailAddress(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                if(rs.getBoolean(6)) {
+                    user.setRoles(new String[] { "GUEST", "ADMIN" });
+                } else {
+                    user.setRoles(new String[] { "GUEST" });
+                }
+            }
+            return user;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch(IndexOutOfBoundsException exception)
-        {
-            return null;
-        }
+        dbManager.closeConnection(conn);
+        return null;
     }
     
-    public User getByEmailAddress(String emailAddress)
-    {
-        Optional<User> result = users.stream()
-            .filter(user -> user.getEmailAddress().equals(emailAddress))
-            .findAny();
+    public User getByEmailAddress(String emailAddress) {
+        Connection conn = dbManager.getConnection();
+        try {
+            User user = new User();;
+            PreparedStatement getUser = conn.prepareStatement("select * from webshop_user where email = ? ");
+            getUser.setString(1, emailAddress);
+            ResultSet rs = getUser.executeQuery();
+            while(rs.next()) {
+                user.setFullName(rs.getString(1));
+                user.setPostcode(rs.getString(2));
+                user.setStreetnumber(rs.getString(3));
+                user.setEmailAddress(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                if(rs.getBoolean(6)) {
+                    user.setRoles(new String[] { "GUEST", "ADMIN" });
+                } else {
+                    user.setRoles(new String[] { "GUEST" });
+                }
+            }
+            return user;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dbManager.closeConnection(conn);
+        return null;
+    }
+    
+    public void add(User user) {
+        Connection conn = dbManager.getConnection();
+        try {
+            boolean admin = false;
+            PreparedStatement insertUser = conn.prepareStatement("insert into webshop_user values(?,?,?,?,?,?)");
+            insertUser.setString(1, user.getFullName());
+            insertUser.setString(2, user.getPostcode());
+            insertUser.setString(3, user.getStreetnumber());
+            insertUser.setString(4, user.getEmailAddress());
+            insertUser.setString(5, user.getPassword());
+            for(int i = 0; i < user.getRoles().length; i++) {
+                if(user.getRoles()[i].equals("ADMIN")) {
+                    admin = true;
+                }
+            }
+            insertUser.setBoolean(6, admin);
+            insertUser.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        return result.isPresent()
-            ? result.get()
-            : null;
     }
     
-    public void add(User user)
-    {
-        users.add(user);
+    public void update(String fullName, User user) {
+        Connection conn = dbManager.getConnection();
+        try {
+            boolean admin = false;
+            PreparedStatement updateUser = conn.prepareStatement("update webshop_user set fullname = ?,"
+                    + " postcode = ?, streetnumber = ?, email = ?,"
+                    + " password = ?, adminrole = ? where fullname = ? ");
+            updateUser.setString(1, user.getFullName());
+            updateUser.setString(2, user.getPostcode());
+            updateUser.setString(3, user.getStreetnumber());
+            updateUser.setString(4, user.getEmailAddress());
+            updateUser.setString(5, user.getPassword());
+            for(int i = 0; i < user.getRoles().length; i++) {
+                if(user.getRoles()[i].equals("ADMIN")) {
+                    admin = true;
+                }
+            }
+            updateUser.setBoolean(6, admin);
+            updateUser.setString(7, fullName);
+            updateUser.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
-    public void update(int id, User user)
-    {
-        users.set(id, user);
-    }
-    
-    public void delete(int id)
-    {
-        users.remove(id);
+    public void delete(String fullName) {
+        Connection conn = dbManager.getConnection();
+        try {
+            PreparedStatement deleteUser = conn.prepareStatement("delete from webshop_user where fullname = ? ");
+            deleteUser.setString(1, fullName);
+            deleteUser.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

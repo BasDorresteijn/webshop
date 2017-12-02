@@ -5,10 +5,13 @@
  */
 package nl.hsleiden.persistence;
 
+import javax.inject.Singleton;
+
 /**
  *
  * @author bas_d
  */
+@Singleton
 public class CartDAO {
     
 }
