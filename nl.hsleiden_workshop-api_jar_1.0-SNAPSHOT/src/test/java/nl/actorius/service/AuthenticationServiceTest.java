@@ -5,6 +5,7 @@ import java.util.Optional;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.basic.BasicCredentials;
 import nl.hsleiden.model.User;
+import nl.hsleiden.persistence.DbManager;
 import nl.hsleiden.persistence.UserDAO;
 import org.junit.After;
 import static org.junit.Assert.assertFalse;
@@ -22,7 +23,8 @@ public class AuthenticationServiceTest
     
     public AuthenticationServiceTest()
     {
-        UserDAO userDAO = new UserDAO();
+        DbManager dbManager = new DbManager();
+        UserDAO userDAO = new UserDAO(dbManager);
         
         subject = new AuthenticationService(userDAO);
     }

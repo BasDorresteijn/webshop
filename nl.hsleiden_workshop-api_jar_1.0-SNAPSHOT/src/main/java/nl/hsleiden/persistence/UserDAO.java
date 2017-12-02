@@ -1,8 +1,15 @@
 package nl.hsleiden.persistence;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import nl.hsleiden.model.User;
 
@@ -13,29 +20,46 @@ import nl.hsleiden.model.User;
 @Singleton
 public class UserDAO
 {
-    private final List<User> users;
+    private List<User> users;
+    private DbManager dbManager;
     
-    public UserDAO()
+    @Inject
+    public UserDAO(DbManager dbManager)
     {
-        User user1 = new User();
-        user1.setFullName("First user");
-        user1.setPostcode("1234AB");
-        user1.setStreetnumber("12");
-        user1.setEmailAddress("first@user.com");
-        user1.setPassword("first");
-        user1.setRoles(new String[] { "GUEST", "ADMIN" });
+        this.dbManager = dbManager;
+        updateUsers();
+    }
+    
+    private void updateUsers() {
+        Connection conn = dbManager.getConnection();
         
-        User user2 = new User();
-        user2.setFullName("Second user");
-        user2.setPostcode("9876ZY");
-        user2.setStreetnumber("98");
-        user2.setEmailAddress("second@user.com");
-        user2.setPassword("second");
-        user2.setRoles(new String[] { "GUEST" });
-        
-        users = new ArrayList<>();
-        users.add(user1);
-        users.add(user2);
+        try {
+            ResultSet getshit = conn.prepareStatement("select * from userdata").executeQuery();
+            while(getshit.next()) {
+                User user1 = new User();
+                user1.setFullName(getshit.getString(1));
+                user1.setPostcode(getshit.getString(2));
+                user1.setStreetnumber(getshit.getString(3));
+                user1.setEmailAddress("first@user.com");
+                user1.setPassword("first");
+                user1.setRoles(new String[] { "GUEST", "ADMIN" });
+
+                User user2 = new User();
+                user2.setFullName(getshit.getString(1));
+                user2.setPostcode(getshit.getString(2));
+                user2.setStreetnumber(getshit.getString(3));
+                user2.setEmailAddress("second@user.com");
+                user2.setPassword("second");
+                user2.setRoles(new String[] { "GUEST" });
+                
+                users = new ArrayList<>();
+                users.add(user1);
+                users.add(user2);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dbManager.closeConnection(conn);
     }
     
     public List<User> getAll()
