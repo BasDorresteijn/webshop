@@ -23,7 +23,7 @@ import nl.hsleiden.model.Product;
 @Singleton
 public class ProductDAO {
     
-    private DbManager dbManager;
+    private final DbManager dbManager;
     
     @Inject
     public ProductDAO(DbManager dbManager) {
@@ -34,21 +34,23 @@ public class ProductDAO {
         Connection conn = dbManager.getConnection();
         ArrayList<Product> producten = new ArrayList<>();
         try {
-            PreparedStatement getProducten = conn.prepareStatement("SELECT * FROM producten");
+            PreparedStatement getProducten = conn.prepareStatement("SELECT * FROM product");
             ResultSet rs = getProducten.executeQuery();
             while(rs.next()) {
                 Product p = new Product();
                 p.setProductName(rs.getString(1));
-                p.setPrice(rs.getDouble(2));
+                p.setPrice(rs.getString(2));
                 p.setDescription(rs.getString(3));
                 p.setAvailable(rs.getInt(4));
                 p.setSoldAmount(rs.getInt(5));
                 producten.add(p);
             }
+            dbManager.closeConnection(conn);
             return producten;
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        dbManager.closeConnection(conn);
         return null;
     }
     
@@ -56,21 +58,51 @@ public class ProductDAO {
         Connection conn = dbManager.getConnection();
         
         try {
+            Product p = new Product();
             PreparedStatement getProduct = conn.prepareStatement("SELECT * FROM producten WHERE productname = ? ");
             getProduct.setString(0, productName);
             ResultSet rs = getProduct.executeQuery();
             while(rs.next()) {
-                Product p = new Product();
                 p.setProductName(rs.getString(1));
-                p.setPrice(rs.getDouble(2));
+                p.setPrice(rs.getString(2));
                 p.setDescription(rs.getString(3));
                 p.setAvailable(rs.getInt(4));
                 p.setSoldAmount(rs.getInt(5));
-                return p;
             }
+            dbManager.closeConnection(conn);
+            return p;
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        dbManager.closeConnection(conn);
         return null;
+    }
+    
+    public void add(Product product) {
+        Connection conn = dbManager.getConnection();
+        try {
+            PreparedStatement insertProduct = conn.prepareStatement("insert into product values(?,?,?,?,?)");
+            insertProduct.setString(1, product.getProductName());
+            insertProduct.setString(2, product.getPrice());
+            insertProduct.setString(3, product.getDescription());
+            insertProduct.setInt(4, product.getAvailable());
+            insertProduct.setInt(5, product.getSoldAmount());
+            insertProduct.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dbManager.closeConnection(conn);
+    }
+
+    public void remove(String productname) {
+        Connection conn = dbManager.getConnection();
+        try {
+            PreparedStatement removeProduct = conn.prepareStatement("delete from product where productname = ?");
+            removeProduct.setString(1, productname);
+            removeProduct.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dbManager.closeConnection(conn);
     }
 }

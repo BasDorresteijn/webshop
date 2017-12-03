@@ -45,7 +45,7 @@ public class Cart {
         return user;
     }
 
-    public void setId(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
     

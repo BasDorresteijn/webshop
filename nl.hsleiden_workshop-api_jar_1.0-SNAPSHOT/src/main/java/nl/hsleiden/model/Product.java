@@ -23,7 +23,7 @@ public class Product {
     
     @NotEmpty
     @JsonView(View.Public.class)
-    private double price;
+    private String price;
     
     @JsonView(View.Public.class)
     private String description;
@@ -42,11 +42,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

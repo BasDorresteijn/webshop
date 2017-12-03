@@ -46,6 +46,7 @@ public class UserDAO
                 }
                 users.add(user);
             }
+            dbManager.closeConnection(conn);
             return users;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,6 +74,7 @@ public class UserDAO
                     user.setRoles(new String[] { "GUEST" });
                 }
             }
+            dbManager.closeConnection(conn);
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,6 +102,7 @@ public class UserDAO
                     user.setRoles(new String[] { "GUEST" });
                 }
             }
+            dbManager.closeConnection(conn);
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -128,7 +131,7 @@ public class UserDAO
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        dbManager.closeConnection(conn);
     }
     
     public void update(String fullName, User user) {
@@ -154,7 +157,8 @@ public class UserDAO
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        dbManager.closeConnection(conn);
+
     }
     
     public void delete(String fullName) {
@@ -166,6 +170,7 @@ public class UserDAO
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        dbManager.closeConnection(conn);
+
     }
 }
