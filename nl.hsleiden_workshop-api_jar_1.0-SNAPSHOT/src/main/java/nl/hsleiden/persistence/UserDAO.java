@@ -18,16 +18,17 @@ import nl.hsleiden.model.User;
 @Singleton
 public class UserDAO
 {
-    private DbManager dbManager;
+    private final DbManager dbManager;
+    private final Connection conn;
     
     @Inject
     public UserDAO(DbManager dbManager)
     {
         this.dbManager = dbManager;
+        this.conn = dbManager.getConnection();
     }
     
     public ArrayList<User> getAll() {
-        Connection conn = dbManager.getConnection();
         ArrayList<User> users;
         try {
             users = new ArrayList<>();
@@ -46,17 +47,14 @@ public class UserDAO
                 }
                 users.add(user);
             }
-            dbManager.closeConnection(conn);
             return users;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
         return null;
     }
     
     public User get(String fullName) {
-        Connection conn = dbManager.getConnection();
         try {
             User user = new User();
             PreparedStatement getUser = conn.prepareStatement("select * from webshop_user where fullname = ? ");
@@ -74,17 +72,14 @@ public class UserDAO
                     user.setRoles(new String[] { "GUEST" });
                 }
             }
-            dbManager.closeConnection(conn);
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
         return null;
     }
     
     public User getByEmailAddress(String emailAddress) {
-        Connection conn = dbManager.getConnection();
         try {
             User user = new User();;
             PreparedStatement getUser = conn.prepareStatement("select * from webshop_user where email = ? ");
@@ -102,17 +97,14 @@ public class UserDAO
                     user.setRoles(new String[] { "GUEST" });
                 }
             }
-            dbManager.closeConnection(conn);
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
         return null;
     }
     
     public void add(User user) {
-        Connection conn = dbManager.getConnection();
         try {
             boolean admin = false;
             PreparedStatement insertUser = conn.prepareStatement("insert into webshop_user values(?,?,?,?,?,?)");
@@ -131,11 +123,9 @@ public class UserDAO
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
     }
     
     public void update(String fullName, User user) {
-        Connection conn = dbManager.getConnection();
         try {
             boolean admin = false;
             PreparedStatement updateUser = conn.prepareStatement("update webshop_user set fullname = ?,"
@@ -157,12 +147,9 @@ public class UserDAO
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
-
     }
     
     public void delete(String fullName) {
-        Connection conn = dbManager.getConnection();
         try {
             PreparedStatement deleteUser = conn.prepareStatement("delete from webshop_user where fullname = ? ");
             deleteUser.setString(1, fullName);
@@ -170,7 +157,5 @@ public class UserDAO
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
-
     }
 }

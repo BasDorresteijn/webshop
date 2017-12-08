@@ -20,6 +20,10 @@ public class Cart {
     
     @JsonView(View.Public.class) 
     private ArrayList<Product> products;
+    
+    public Cart() {
+        this.products = new ArrayList<>();
+    }
 
     public ArrayList<Product> getProducts() {
         return products;

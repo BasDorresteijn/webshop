@@ -97,5 +97,5 @@
             </plugin>
         </plugins>
     </build>
-    
+    <name>webshop-api</name>
 </project>

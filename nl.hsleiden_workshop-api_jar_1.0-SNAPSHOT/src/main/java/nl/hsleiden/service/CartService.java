@@ -5,10 +5,32 @@
  */
 package nl.hsleiden.service;
 
+import java.util.Collection;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import nl.hsleiden.model.Cart;
+import nl.hsleiden.persistence.CartDAO;
+
 /**
  *
  * @author bas_d
  */
+@Singleton
 public class CartService {
+    
+    private final CartDAO cartDAO;
+    
+    @Inject
+    public CartService(CartDAO cartDAO) {
+        this.cartDAO = cartDAO;
+    }
+
+    public Collection<Cart> getAll() {
+        return cartDAO.getCarts();
+    }
+
+    public Cart getCart(String fullname) {
+        return cartDAO.getCart(fullname);
+    }
     
 }

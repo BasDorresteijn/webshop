@@ -24,14 +24,15 @@ import nl.hsleiden.model.Product;
 public class ProductDAO {
     
     private final DbManager dbManager;
+    private final Connection conn;
     
     @Inject
     public ProductDAO(DbManager dbManager) {
         this.dbManager = dbManager;
+        this.conn = dbManager.getConnection();
     }
     
     public ArrayList<Product> getAllProducten() {
-        Connection conn = dbManager.getConnection();
         ArrayList<Product> producten = new ArrayList<>();
         try {
             PreparedStatement getProducten = conn.prepareStatement("SELECT * FROM product");
@@ -45,22 +46,19 @@ public class ProductDAO {
                 p.setSoldAmount(rs.getInt(5));
                 producten.add(p);
             }
-            dbManager.closeConnection(conn);
             return producten;
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
         return null;
     }
     
     public Product getProduct(String productName) {
-        Connection conn = dbManager.getConnection();
         
         try {
             Product p = new Product();
-            PreparedStatement getProduct = conn.prepareStatement("SELECT * FROM producten WHERE productname = ? ");
-            getProduct.setString(0, productName);
+            PreparedStatement getProduct = conn.prepareStatement("SELECT * FROM product WHERE productname = ? ");
+            getProduct.setString(1, productName);
             ResultSet rs = getProduct.executeQuery();
             while(rs.next()) {
                 p.setProductName(rs.getString(1));
@@ -69,17 +67,14 @@ public class ProductDAO {
                 p.setAvailable(rs.getInt(4));
                 p.setSoldAmount(rs.getInt(5));
             }
-            dbManager.closeConnection(conn);
             return p;
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
         return null;
     }
     
     public void add(Product product) {
-        Connection conn = dbManager.getConnection();
         try {
             PreparedStatement insertProduct = conn.prepareStatement("insert into product values(?,?,?,?,?)");
             insertProduct.setString(1, product.getProductName());
@@ -91,11 +86,25 @@ public class ProductDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
+    }
+    
+    public void update(String productname, Product product) {
+        try {
+            PreparedStatement updateProduct = conn.prepareStatement("update product set productname = ?, price = ?, description = ?, "
+                    + "available = ?. soldAmount = ? WHERE productname = ?");
+            updateProduct.setString(1, product.getProductName());
+            updateProduct.setString(2, product.getPrice());
+            updateProduct.setString(3, product.getDescription());
+            updateProduct.setInt(4, product.getAvailable());
+            updateProduct.setInt(5, product.getSoldAmount());            
+            updateProduct.setString(6, productname);
+            updateProduct.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void remove(String productname) {
-        Connection conn = dbManager.getConnection();
         try {
             PreparedStatement removeProduct = conn.prepareStatement("delete from product where productname = ?");
             removeProduct.setString(1, productname);
@@ -103,6 +112,5 @@ public class ProductDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dbManager.closeConnection(conn);
     }
 }
