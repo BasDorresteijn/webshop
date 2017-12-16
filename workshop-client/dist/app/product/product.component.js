@@ -10,7 +10,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, core_2, BasComponent;
+    var core_1, core_2, ProductComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -19,27 +19,27 @@ System.register(["@angular/core"], function (exports_1, context_1) {
             }
         ],
         execute: function () {
-            BasComponent = /** @class */ (function () {
-                function BasComponent() {
+            ProductComponent = /** @class */ (function () {
+                function ProductComponent() {
                     this.productnaam = "he";
                     console.log(this.productnaam);
                 }
                 __decorate([
                     core_2.Input(),
                     __metadata("design:type", String)
-                ], BasComponent.prototype, "productnaam", void 0);
-                BasComponent = __decorate([
+                ], ProductComponent.prototype, "productnaam", void 0);
+                ProductComponent = __decorate([
                     core_1.Component({
-                        selector: 'bas',
-                        templateUrl: 'app/bas/bas.component.html',
-                        styleUrls: ['app/bas/bas.component.css'],
+                        selector: 'product',
+                        templateUrl: 'app/product/product.component.html',
+                        styleUrls: ['app/product/product.component.css'],
                     }),
                     __metadata("design:paramtypes", [])
-                ], BasComponent);
-                return BasComponent;
+                ], ProductComponent);
+                return ProductComponent;
             }());
-            exports_1("BasComponent", BasComponent);
+            exports_1("ProductComponent", ProductComponent);
         }
     };
 });
-//# sourceMappingURL=bas.component.js.map
+//# sourceMappingURL=product.component.js.map

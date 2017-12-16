@@ -8,7 +8,7 @@ import { PublicModule } from './public.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
-import { BasModule } from './bas/bas.module';
+import { ProductModule } from './product/product.module';
 
 import { AppComponent } from './app.component';
 
@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
     SharedModule,
     HomeModule,
     UserModule,
-    BasModule
+    ProductModule
   ],
   exports: [ PublicModule ],
   declarations: [ AppComponent ],

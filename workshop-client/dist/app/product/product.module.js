@@ -1,4 +1,4 @@
-System.register(["@angular/core", "../public.module", "../user/user.module", "./bas.component"], function (exports_1, context_1) {
+System.register(["@angular/core", "../public.module", "../user/user.module", "./product.component"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, public_module_1, user_module_1, bas_component_1, BasModule;
+    var core_1, public_module_1, user_module_1, product_component_1, ProductModule;
     return {
         setters: [
             function (core_1_1) {
@@ -19,25 +19,25 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
             function (user_module_1_1) {
                 user_module_1 = user_module_1_1;
             },
-            function (bas_component_1_1) {
-                bas_component_1 = bas_component_1_1;
+            function (product_component_1_1) {
+                product_component_1 = product_component_1_1;
             }
         ],
         execute: function () {
-            BasModule = /** @class */ (function () {
-                function BasModule() {
+            ProductModule = /** @class */ (function () {
+                function ProductModule() {
                 }
-                BasModule = __decorate([
+                ProductModule = __decorate([
                     core_1.NgModule({
                         imports: [public_module_1.PublicModule, user_module_1.UserModule],
-                        declarations: [bas_component_1.BasComponent],
-                        exports: [bas_component_1.BasComponent],
+                        declarations: [product_component_1.ProductComponent],
+                        exports: [product_component_1.ProductComponent],
                     })
-                ], BasModule);
-                return BasModule;
+                ], ProductModule);
+                return ProductModule;
             }());
-            exports_1("BasModule", BasModule);
+            exports_1("ProductModule", ProductModule);
         }
     };
 });
-//# sourceMappingURL=bas.module.js.map
+//# sourceMappingURL=product.module.js.map

@@ -40,4 +40,4 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
         }
     };
 });
-//# sourceMappingURL=bas.module.js.map
+//# sourceMappingURL=product.module.js.map

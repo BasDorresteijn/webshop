@@ -21,12 +21,13 @@ System.register(["@angular/core", "../shared/authorization.service"], function (
             }
         ],
         execute: function () {
-            HomeComponent = (function () {
+            HomeComponent = /** @class */ (function () {
                 function HomeComponent(authService) {
                     var _this = this;
                     this.authService = authService;
                     this.authenticated = false;
                     this.userName = '';
+                    this.products = ["one", "two", "three"];
                     authService.authorized$.subscribe(function (authorized) {
                         _this.updateAuthentication();
                     });
@@ -41,16 +42,16 @@ System.register(["@angular/core", "../shared/authorization.service"], function (
                     var user = this.authService.getAuthenticator();
                     this.userName = user.fullName;
                 };
+                HomeComponent = __decorate([
+                    core_1.Component({
+                        selector: 'app-home',
+                        templateUrl: 'app/home/home.component.html',
+                        styleUrls: ['app/home/home.component.css'],
+                    }),
+                    __metadata("design:paramtypes", [authorization_service_1.AuthorizationService])
+                ], HomeComponent);
                 return HomeComponent;
             }());
-            HomeComponent = __decorate([
-                core_1.Component({
-                    selector: 'app-home',
-                    templateUrl: 'app/home/home.component.html',
-                    styleUrls: ['app/home/home.component.css'],
-                }),
-                __metadata("design:paramtypes", [authorization_service_1.AuthorizationService])
-            ], HomeComponent);
             exports_1("HomeComponent", HomeComponent);
         }
     };

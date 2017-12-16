@@ -13,7 +13,7 @@ import { ListComponent } from './list/list.component';
 @NgModule({
     imports: [ PublicModule, SharedModule ],
     exports: [ LoginComponent ],
-    declarations: [ RegisterComponent, LoginComponent, ListComponent ],
+    declarations: [ RegisterComponent, LoginComponent, ListComponent],
     providers: [ UserService ]
 })
 export class UserModule { }

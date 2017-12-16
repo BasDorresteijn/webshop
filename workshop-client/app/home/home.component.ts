@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { AuthorizationService } from '../shared/authorization.service';
 
 import { User } from '../user/user';
+import { Directive } from '@angular/core'
 
 @Component({
     selector: 'app-home',
@@ -15,6 +16,8 @@ export class HomeComponent
     public authenticated: boolean = false;
     
     public userName = '';
+
+    public products: Array<String> = ["one", "two", "three"]
 
     constructor(private authService: AuthorizationService)
     {

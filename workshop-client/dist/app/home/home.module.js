@@ -1,4 +1,4 @@
-System.register(["@angular/core", "../public.module", "../user/user.module", "./home.component"], function (exports_1, context_1) {
+System.register(["@angular/core", "../public.module", "../user/user.module", "./home.component", "../product/product.module"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, public_module_1, user_module_1, home_component_1, HomeModule;
+    var core_1, public_module_1, user_module_1, home_component_1, product_module_1, HomeModule;
     return {
         setters: [
             function (core_1_1) {
@@ -21,6 +21,9 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
             },
             function (home_component_1_1) {
                 home_component_1 = home_component_1_1;
+            },
+            function (product_module_1_1) {
+                product_module_1 = product_module_1_1;
             }
         ],
         execute: function () {
@@ -29,7 +32,7 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
                 }
                 HomeModule = __decorate([
                     core_1.NgModule({
-                        imports: [public_module_1.PublicModule, user_module_1.UserModule],
+                        imports: [public_module_1.PublicModule, user_module_1.UserModule, product_module_1.ProductModule],
                         declarations: [home_component_1.HomeComponent]
                     })
                 ], HomeModule);
