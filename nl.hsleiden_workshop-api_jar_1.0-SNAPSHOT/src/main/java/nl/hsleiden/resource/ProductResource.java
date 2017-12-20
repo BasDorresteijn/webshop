@@ -15,6 +15,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -41,7 +42,6 @@ public class ProductResource {
     
     @GET
     @JsonView(View.Public.class)
-    @RolesAllowed("GUEST")
     public Collection<Product> retrieveAll()
     {
         return productService.getAll();
@@ -56,12 +56,26 @@ public class ProductResource {
         return productService.getAll();
     }
     
+    @GET
+    @Path("/{productname}")
+    @JsonView(View.Public.class)
+    public Product retrieveProduct(@PathParam("productname") String productname) {
+        return productService.getProduct(productname);
+    }
+    
     @POST
     @JsonView(View.Private.class)
     @Consumes(MediaType.APPLICATION_JSON)
     @RolesAllowed("ADMIN")
     public void addProduct(@Valid Product product) {
         productService.addProduct(product);
+    }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed("GUEST")
+    public void updateProduct(@Valid Product product) {
+        productService.updateProduct(product.getProductName(), product);
     }
     
     @DELETE 

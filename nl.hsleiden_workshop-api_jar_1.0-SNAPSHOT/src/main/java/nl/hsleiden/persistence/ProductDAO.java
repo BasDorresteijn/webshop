@@ -35,7 +35,7 @@ public class ProductDAO {
     public ArrayList<Product> getAllProducten() {
         ArrayList<Product> producten = new ArrayList<>();
         try {
-            PreparedStatement getProducten = conn.prepareStatement("SELECT * FROM product");
+            PreparedStatement getProducten = conn.prepareStatement("SELECT * FROM product ORDER BY productname desc");
             ResultSet rs = getProducten.executeQuery();
             while(rs.next()) {
                 Product p = new Product();
@@ -91,13 +91,24 @@ public class ProductDAO {
     public void update(String productname, Product product) {
         try {
             PreparedStatement updateProduct = conn.prepareStatement("update product set productname = ?, price = ?, description = ?, "
-                    + "available = ?. soldAmount = ? WHERE productname = ?");
+                    + "available = ?, soldAmount = ? WHERE productname = ?");
             updateProduct.setString(1, product.getProductName());
             updateProduct.setString(2, product.getPrice());
             updateProduct.setString(3, product.getDescription());
             updateProduct.setInt(4, product.getAvailable());
             updateProduct.setInt(5, product.getSoldAmount());            
             updateProduct.setString(6, productname);
+            updateProduct.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        public void buy(String productname, Product product) {
+        try {
+            PreparedStatement updateProduct = conn.prepareStatement("update product set available = ? WHERE productname = ?");
+            updateProduct.setInt(1, product.getAvailable());         
+            updateProduct.setString(2, productname);
             updateProduct.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
