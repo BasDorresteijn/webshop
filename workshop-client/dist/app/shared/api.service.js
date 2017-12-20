@@ -24,25 +24,30 @@ System.register(["@angular/core", "@angular/common/http", "./authorization.servi
             }
         ],
         execute: function () {
-            ApiService = (function () {
+            ApiService = /** @class */ (function () {
                 function ApiService(http, authService) {
                     this.http = http;
                     this.authService = authService;
                 }
-                ApiService.prototype.createQueryString = function (queryParameters) {
-                    var queryString = '';
-                    if (typeof queryParameters === 'object') {
-                        for (var key in queryParameters) {
-                            var value = queryParameters[key];
-                            var prefix = queryString.length === 0 ? '?' : '&';
-                            queryString += "" + prefix + key + "=" + value;
-                        }
-                    }
-                    return queryString;
-                };
+                // private createQueryString(queryParameters: Object): string
+                // {
+                //     let queryString = '';
+                //     if (typeof queryParameters === 'object')
+                //     {
+                //         for (let key in queryParameters)
+                //         {
+                //             let value = queryParameters[key];
+                //             let prefix = queryString.length === 0 ? '?' : '&';
+                //             queryString += `${prefix}${key}=${value}`;
+                //         }
+                //     }
+                //     return queryString;
+                // }
                 ApiService.prototype.createURI = function (path, queryParameters) {
-                    var queryString = this.createQueryString(queryParameters);
-                    return "/api/" + path + queryString;
+                    if (queryParameters == null) {
+                        queryParameters = "";
+                    }
+                    return "/api/" + path + queryParameters;
                 };
                 ApiService.prototype.createRequestHeaders = function () {
                     var headers = new http_1.HttpHeaders();
@@ -71,12 +76,12 @@ System.register(["@angular/core", "@angular/common/http", "./authorization.servi
                     var headers = this.createRequestHeaders();
                     return this.http.delete(uri, { headers: headers });
                 };
+                ApiService = __decorate([
+                    core_1.Injectable(),
+                    __metadata("design:paramtypes", [http_1.HttpClient, authorization_service_1.AuthorizationService])
+                ], ApiService);
                 return ApiService;
             }());
-            ApiService = __decorate([
-                core_1.Injectable(),
-                __metadata("design:paramtypes", [http_1.HttpClient, authorization_service_1.AuthorizationService])
-            ], ApiService);
             exports_1("ApiService", ApiService);
         }
     };

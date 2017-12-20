@@ -42,4 +42,8 @@ export class HeaderComponent
         
         this.goHome();
     }
+
+    public goLogin() {
+        this.router.navigate(['login'])
+    }
 }

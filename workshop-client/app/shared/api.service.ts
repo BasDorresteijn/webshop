@@ -13,29 +13,30 @@ export class ApiService
 
     }
 
-    private createQueryString(queryParameters: Object): string
-    {
-        let queryString = '';
+    // private createQueryString(queryParameters: Object): string
+    // {
+    //     let queryString = '';
         
-        if (typeof queryParameters === 'object')
-        {
-            for (let key in queryParameters)
-            {
-                let value = queryParameters[key];
-                let prefix = queryString.length === 0 ? '?' : '&';
+    //     if (typeof queryParameters === 'object')
+    //     {
+    //         for (let key in queryParameters)
+    //         {
+    //             let value = queryParameters[key];
+    //             let prefix = queryString.length === 0 ? '?' : '&';
                 
-                queryString += `${prefix}${key}=${value}`;
-            }
-        }
+    //             queryString += `${prefix}${key}=${value}`;
+    //         }
+    //     }
         
-        return queryString;
-    }
+    //     return queryString;
+    // }
 
-    private createURI(path: string, queryParameters: Object): string
+    private createURI(path: string, queryParameters: String): string
     {
-        let queryString = this.createQueryString(queryParameters);
-        
-        return `/api/${path}${queryString}`;
+        if(queryParameters == null) {
+            queryParameters = "";
+        }
+        return `/api/${path}${queryParameters}`;
     }
 
     private createRequestHeaders(): HttpHeaders
@@ -50,7 +51,7 @@ export class ApiService
         return headers;
     }
 
-    public get<T>(path: string, queryParameters?: Object): Observable<T>
+    public get<T>(path: string, queryParameters?: String): Observable<T>
     {
         let uri = this.createURI(path, queryParameters);
         let headers = this.createRequestHeaders();
@@ -58,7 +59,7 @@ export class ApiService
         return this.http.get<T>(uri, { headers: headers });
     }
 
-    public post<T>(path: string, data: Object, queryParameters?: Object): Observable<T>
+    public post<T>(path: string, data: Object, queryParameters?: String): Observable<T>
     {
         let uri = this.createURI(path, queryParameters);
         let headers = this.createRequestHeaders();
@@ -66,7 +67,7 @@ export class ApiService
         return this.http.post(uri, data, { headers: headers });
     }
 
-    public put<T>(path: string, data: string, queryParameters?: Object): Observable<T>
+    public put<T>(path: string, data: Object, queryParameters?: String): Observable<T>
     {
         let uri = this.createURI(path, queryParameters);
         let headers = this.createRequestHeaders();
@@ -74,7 +75,7 @@ export class ApiService
         return this.http.put(uri, data, { headers: headers });
     }
 
-    public delete<T>(path: string, queryParameters?: Object): Observable<T>
+    public delete<T>(path: string, queryParameters?: String): Observable<T>
     {
         let uri = this.createURI(path, queryParameters);
         let headers = this.createRequestHeaders();

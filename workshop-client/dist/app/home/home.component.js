@@ -27,7 +27,6 @@ System.register(["@angular/core", "../shared/authorization.service"], function (
                     this.authService = authService;
                     this.authenticated = false;
                     this.userName = '';
-                    this.products = ["one", "two", "three"];
                     authService.authorized$.subscribe(function (authorized) {
                         _this.updateAuthentication();
                     });

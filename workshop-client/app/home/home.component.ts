@@ -17,8 +17,6 @@ export class HomeComponent
     
     public userName = '';
 
-    public products: Array<String> = ["one", "two", "three"]
-
     constructor(private authService: AuthorizationService)
     {
         authService.authorized$.subscribe(

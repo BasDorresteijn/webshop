@@ -4,10 +4,9 @@
 
     <span class="fill-remaining-space"></span>
 
-    <div *ngIf="authenticated">
-        <button mat-raised-button class="mat-accent" (click)="goHome()">Home</button>
-        <button mat-raised-button class="mat-accent" (click)="goUsers()">Gebruikers</button>
-        <button mat-raised-button class="mat-warn" (click)="logout()">Uitloggen</button>
-    </div>
+    <button mat-raised-button class="mat-accent" (click)="goHome()">Home</button>
+    <button *ngIf="!authenticated" mat-raised-button class="mat-accent" (click)="goLogin()">Inloggen</button>
+    <button *ngIf="authenticated" mat-raised-button class="mat-accent" (click)="goUsers()">Gebruikers</button>
+    <button *ngIf="authenticated" mat-raised-button class="mat-warn" (click)="logout()">Uitloggen</button>
 
 </mat-toolbar>

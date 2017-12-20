@@ -24,7 +24,7 @@ System.register(["@angular/core", "@angular/router", "../authorization.service"]
             }
         ],
         execute: function () {
-            HeaderComponent = (function () {
+            HeaderComponent = /** @class */ (function () {
                 function HeaderComponent(authService, router) {
                     var _this = this;
                     this.authService = authService;
@@ -45,16 +45,19 @@ System.register(["@angular/core", "@angular/router", "../authorization.service"]
                     this.authService.deleteAuthorization();
                     this.goHome();
                 };
+                HeaderComponent.prototype.goLogin = function () {
+                    this.router.navigate(['login']);
+                };
+                HeaderComponent = __decorate([
+                    core_1.Component({
+                        selector: 'app-header',
+                        templateUrl: 'app/shared/header/header.component.html',
+                        styleUrls: ['app/shared/header/header.component.css'],
+                    }),
+                    __metadata("design:paramtypes", [authorization_service_1.AuthorizationService, router_1.Router])
+                ], HeaderComponent);
                 return HeaderComponent;
             }());
-            HeaderComponent = __decorate([
-                core_1.Component({
-                    selector: 'app-header',
-                    templateUrl: 'app/shared/header/header.component.html',
-                    styleUrls: ['app/shared/header/header.component.css'],
-                }),
-                __metadata("design:paramtypes", [authorization_service_1.AuthorizationService, router_1.Router])
-            ], HeaderComponent);
             exports_1("HeaderComponent", HeaderComponent);
         }
     };

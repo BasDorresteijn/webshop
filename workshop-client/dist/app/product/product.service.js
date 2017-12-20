@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, api_service_1, authorization_service_1, UserService;
+    var core_1, router_1, api_service_1, authorization_service_1, productService;
     return {
         setters: [
             function (core_1_1) {
@@ -27,57 +27,44 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
             }
         ],
         execute: function () {
-            UserService = /** @class */ (function () {
-                function UserService(api, authService, router) {
+            productService = /** @class */ (function () {
+                function productService(api, authService, router) {
                     this.api = api;
                     this.authService = authService;
                     this.router = router;
                 }
-                UserService.prototype.getAll = function () {
-                    return this.api.get('users');
+                productService.prototype.getAll = function () {
+                    return this.api.get('products');
                 };
-                UserService.prototype.register = function (user) {
-                    var _this = this;
+                productService.prototype.getProduct = function (productnaam) {
+                    if (productnaam == null) {
+                        return null;
+                    }
+                    return this.api.get('products/' + productnaam);
+                };
+                productService.prototype.updateProduct = function (product) {
                     var data = {
-                        fullName: user.fullName,
-                        postcode: user.postcode,
-                        streetnumber: user.streetnumber,
-                        emailAddress: user.emailAddress,
-                        password: user.password
+                        productName: product.productName,
+                        price: product.price,
+                        description: product.description,
+                        available: (product.available - 1)
                     };
-                    this.api.post('users', data).subscribe(function (data) {
-                        _this.goHome();
+                    this.api.put("products", data).subscribe(function (data) {
+                        product.available = product.available - 1;
                     }, function (error) {
-                        alert('Het registreren is mislukt');
+                        alert("Je moet ingelogd zijn om een product te kopen");
                     });
                 };
-                UserService.prototype.login = function (user, remember) {
-                    var _this = this;
-                    this.authService.setAuthorization(user.emailAddress, user.password);
-                    this.api.get('users/me').subscribe(function (authenticator) {
-                        _this.authService.storeAuthorization(authenticator, remember);
-                        _this.goHome();
-                    }, function (error) {
-                        alert('Het inloggen is mislukt');
-                    });
-                };
-                UserService.prototype.logout = function () {
-                    this.authService.deleteAuthorization();
-                    this.goHome();
-                };
-                UserService.prototype.goHome = function () {
-                    this.router.navigate(['']);
-                };
-                UserService = __decorate([
+                productService = __decorate([
                     core_1.Injectable(),
                     __metadata("design:paramtypes", [api_service_1.ApiService,
                         authorization_service_1.AuthorizationService,
                         router_1.Router])
-                ], UserService);
-                return UserService;
+                ], productService);
+                return productService;
             }());
-            exports_1("UserService", UserService);
+            exports_1("productService", productService);
         }
     };
 });
-//# sourceMappingURL=user.service.js.map
+//# sourceMappingURL=product.service.js.map
