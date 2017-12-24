@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/router", "./home/home.component", "./user/register/register.component", "./user/login/login.component", "./user/list/list.component", "./product/productlist/list.component"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", "./home/home.component", "./user/register/register.component", "./user/login/login.component", "./user/list/list.component", "./product/productlist/list.component", "./cart/showcart/cart.component"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "@angular/router", "./home/home.component", ".
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, home_component_1, register_component_1, login_component_1, list_component_1, list_component_2, routes, RoutesModule;
+    var core_1, router_1, home_component_1, register_component_1, login_component_1, list_component_1, list_component_2, cart_component_1, routes, RoutesModule;
     return {
         setters: [
             function (core_1_1) {
@@ -30,6 +30,9 @@ System.register(["@angular/core", "@angular/router", "./home/home.component", ".
             },
             function (list_component_2_1) {
                 list_component_2 = list_component_2_1;
+            },
+            function (cart_component_1_1) {
+                cart_component_1 = cart_component_1_1;
             }
         ],
         execute: function () {
@@ -38,7 +41,8 @@ System.register(["@angular/core", "@angular/router", "./home/home.component", ".
                 { path: 'register', component: register_component_1.RegisterComponent },
                 { path: 'login', component: login_component_1.LoginComponent },
                 { path: 'users', component: list_component_1.UserListComponent },
-                { path: 'products', component: list_component_2.ProductListComponent }
+                { path: 'products', component: list_component_2.ProductListComponent },
+                { path: 'cart', component: cart_component_1.CartComponent }
             ]);
             RoutesModule = /** @class */ (function () {
                 function RoutesModule() {

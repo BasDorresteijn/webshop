@@ -1,21 +1,21 @@
 System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var product;
+    var Product;
     return {
         setters: [],
         execute: function () {
-            product = /** @class */ (function () {
-                function product(productName, price, description, available, soldAmount) {
+            Product = /** @class */ (function () {
+                function Product(productName, price, description, available, soldAmount) {
                     this.productName = productName;
                     this.price = price;
                     this.description = description;
                     this.available = available;
                     this.soldAmount = soldAmount;
                 }
-                return product;
+                return Product;
             }());
-            exports_1("product", product);
+            exports_1("Product", Product);
         }
     };
 });

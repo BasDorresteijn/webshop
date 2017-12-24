@@ -1,4 +1,4 @@
-export class product
+export class Product
 {
     constructor(
         public productName?: String,

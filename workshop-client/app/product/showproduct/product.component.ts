@@ -2,8 +2,8 @@
 import { Component } from '@angular/core';
 
 import { Input } from '@angular/core';
-import { productService } from '../product.service';
-import { product } from '../product';
+import { ProductService } from '../product.service';
+import { Product } from '../product';
 import { Observable } from 'rxjs/Observable';
 import { Directive } from '@angular/core'
 
@@ -15,9 +15,9 @@ import { Directive } from '@angular/core'
 })
 export class ProductComponent
 { 
-    producten: product[];
+    producten: Product[];
 
-    constructor(private service: productService) {
+    constructor(private service: ProductService) {
         this.getProducten()
     }
 
@@ -37,7 +37,7 @@ export class ProductComponent
         return this.producten!==null
     }
 
-    public buyProduct(product: product) {
+    public buyProduct(product: Product) {
         this.service.updateProduct(product)
     }
 }

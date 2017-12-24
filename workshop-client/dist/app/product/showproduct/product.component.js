@@ -46,7 +46,7 @@ System.register(["@angular/core", "../product.service"], function (exports_1, co
                         templateUrl: 'app/product/showproduct/product.component.html',
                         styleUrls: ['app/product/showproduct/product.component.css'],
                     }),
-                    __metadata("design:paramtypes", [product_service_1.productService])
+                    __metadata("design:paramtypes", [product_service_1.ProductService])
                 ], ProductComponent);
                 return ProductComponent;
             }());

@@ -50,4 +50,8 @@ export class HeaderComponent
     public goProducts() {
         this.router.navigate(['products'])
     }
+
+    public goCart() {
+        this.router.navigate(['cart'])
+    }
 }

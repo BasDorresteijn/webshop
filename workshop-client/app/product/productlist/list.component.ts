@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 import { ListDataSource } from './list.datasource';
-import { productService } from '../product.service';
+import { ProductService } from '../product.service';
 
 @Component({
     selector: 'product-list',
@@ -14,7 +14,7 @@ export class ProductListComponent
     public displayedColumns = ['productname', 'price', 'description', 'available', 'soldAmount'];
     public dataSource = null;
     
-    constructor(private productService : productService)
+    constructor(private productService : ProductService)
     {
         this.getProductList();
     }

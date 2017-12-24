@@ -46,7 +46,7 @@ System.register(["@angular/core", "./list.datasource", "../product.service"], fu
                         templateUrl: 'app/product/productlist/list.component.html',
                         styleUrls: ['app/product/productlist/list.component.css'],
                     }),
-                    __metadata("design:paramtypes", [product_service_1.productService])
+                    __metadata("design:paramtypes", [product_service_1.ProductService])
                 ], ProductListComponent);
                 return ProductListComponent;
             }());

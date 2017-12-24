@@ -38,7 +38,7 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
                         imports: [public_module_1.PublicModule, user_module_1.UserModule],
                         declarations: [product_component_1.ProductComponent, list_component_1.ProductListComponent],
                         exports: [product_component_1.ProductComponent, list_component_1.ProductListComponent],
-                        providers: [product_service_1.productService]
+                        providers: [product_service_1.ProductService]
                     })
                 ], ProductModule);
                 return ProductModule;

@@ -11,6 +11,7 @@ import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
 
 import { AppComponent } from './app.component';
+import { CartModule } from './cart/cart.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { AppComponent } from './app.component';
     SharedModule,
     HomeModule,
     UserModule,
-    ProductModule
+    ProductModule,
+    CartModule
   ],
   exports: [ PublicModule ],
   declarations: [ AppComponent ],

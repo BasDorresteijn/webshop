@@ -5,11 +5,11 @@ import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from '../shared/api.service';
 import { AuthorizationService } from '../shared/authorization.service';
-import { product } from './product';
+import { Product } from './product';
 
 
 @Injectable()
-export class productService
+export class ProductService
 {
     constructor(private api: ApiService,
         private authService: AuthorizationService,
@@ -17,24 +17,24 @@ export class productService
     {        
     }
 
-    public getAll(): Observable<product[]>
+    public getAll(): Observable<Product[]>
     {
-        return this.api.get<product[]>('products');
+        return this.api.get<Product[]>('products');
     }
 
-    public getAllAdmin(): Observable<product[]>
+    public getAllAdmin(): Observable<Product[]>
     {
-        return this.api.get<product[]>('products/admin');
+        return this.api.get<Product[]>('products/admin');
     }
     
-    public getProduct(productnaam): Observable<product[]>{
+    public getProduct(productnaam): Observable<Product[]>{
         if(productnaam == null) {
             return null;
         }
-        return this.api.get<product[]>('products/' + productnaam);
+        return this.api.get<Product[]>('products/' + productnaam);
     }
 
-    public updateProduct(product: product) {
+    public updateProduct(product: Product) {
         let data = {
             productName: product.productName,
             price: product.price,

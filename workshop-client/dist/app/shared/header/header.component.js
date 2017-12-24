@@ -51,6 +51,9 @@ System.register(["@angular/core", "@angular/router", "../authorization.service"]
                 HeaderComponent.prototype.goProducts = function () {
                     this.router.navigate(['products']);
                 };
+                HeaderComponent.prototype.goCart = function () {
+                    this.router.navigate(['cart']);
+                };
                 HeaderComponent = __decorate([
                     core_1.Component({
                         selector: 'app-header',

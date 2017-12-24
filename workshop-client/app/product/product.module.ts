@@ -7,13 +7,13 @@ import { UserModule } from '../user/user.module';
 import { ProductComponent } from './showproduct/product.component'
 import { ProductListComponent } from './productlist/list.component'
 import { Input } from '@angular/core';
-import { productService } from './product.service';
+import { ProductService } from './product.service';
 
 @NgModule({
     imports: [ PublicModule, UserModule ],
     declarations: [ ProductComponent, ProductListComponent ],
     exports: [ ProductComponent, ProductListComponent ],
-    providers: [ productService ]
+    providers: [ ProductService ]
 })
 export class ProductModule { 
 }

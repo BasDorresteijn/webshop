@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, api_service_1, authorization_service_1, productService;
+    var core_1, router_1, api_service_1, authorization_service_1, ProductService;
     return {
         setters: [
             function (core_1_1) {
@@ -27,25 +27,25 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
             }
         ],
         execute: function () {
-            productService = /** @class */ (function () {
-                function productService(api, authService, router) {
+            ProductService = /** @class */ (function () {
+                function ProductService(api, authService, router) {
                     this.api = api;
                     this.authService = authService;
                     this.router = router;
                 }
-                productService.prototype.getAll = function () {
+                ProductService.prototype.getAll = function () {
                     return this.api.get('products');
                 };
-                productService.prototype.getAllAdmin = function () {
+                ProductService.prototype.getAllAdmin = function () {
                     return this.api.get('products/admin');
                 };
-                productService.prototype.getProduct = function (productnaam) {
+                ProductService.prototype.getProduct = function (productnaam) {
                     if (productnaam == null) {
                         return null;
                     }
                     return this.api.get('products/' + productnaam);
                 };
-                productService.prototype.updateProduct = function (product) {
+                ProductService.prototype.updateProduct = function (product) {
                     var data = {
                         productName: product.productName,
                         price: product.price,
@@ -59,15 +59,15 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                         console.log(data);
                     });
                 };
-                productService = __decorate([
+                ProductService = __decorate([
                     core_1.Injectable(),
                     __metadata("design:paramtypes", [api_service_1.ApiService,
                         authorization_service_1.AuthorizationService,
                         router_1.Router])
-                ], productService);
-                return productService;
+                ], ProductService);
+                return ProductService;
             }());
-            exports_1("productService", productService);
+            exports_1("ProductService", ProductService);
         }
     };
 });
