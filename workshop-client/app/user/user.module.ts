@@ -8,12 +8,12 @@ import { UserService } from './user.service';
 
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { ListComponent } from './list/list.component';
+import { UserListComponent } from './list/list.component';
 
 @NgModule({
     imports: [ PublicModule, SharedModule ],
     exports: [ LoginComponent ],
-    declarations: [ RegisterComponent, LoginComponent, ListComponent],
+    declarations: [ RegisterComponent, LoginComponent, UserListComponent],
     providers: [ UserService ]
 })
 export class UserModule { }

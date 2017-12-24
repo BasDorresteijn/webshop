@@ -5,14 +5,16 @@ import { RouterModule, Routes }   from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './user/register/register.component';
 import { LoginComponent } from './user/login/login.component';
-import { ListComponent } from './user/list/list.component';
+import { UserListComponent } from './user/list/list.component';
+import { ProductListComponent } from './product/productlist/list.component'
 
 export const routes: Routes =
 [
     { path: '', component: HomeComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'users', component: ListComponent },
+    { path: 'users', component: UserListComponent },
+    { path: 'products', component: ProductListComponent}
 ];
 
 @NgModule({

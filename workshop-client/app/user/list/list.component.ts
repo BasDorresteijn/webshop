@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
     templateUrl: 'app/user/list/list.component.html',
     styleUrls: ['app/user/list/list.component.css'],
 })
-export class ListComponent
+export class UserListComponent
 {
     public displayedColumns = ['fullName', 'postcode', 'streetnumber', 'emailAddress'];
     public dataSource = null;

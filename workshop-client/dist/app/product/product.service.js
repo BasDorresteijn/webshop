@@ -36,6 +36,9 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                 productService.prototype.getAll = function () {
                     return this.api.get('products');
                 };
+                productService.prototype.getAllAdmin = function () {
+                    return this.api.get('products/admin');
+                };
                 productService.prototype.getProduct = function (productnaam) {
                     if (productnaam == null) {
                         return null;
@@ -53,6 +56,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                         product.available = product.available - 1;
                     }, function (error) {
                         alert("Je moet ingelogd zijn om een product te kopen");
+                        console.log(data);
                     });
                 };
                 productService = __decorate([

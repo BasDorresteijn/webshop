@@ -1,0 +1,39 @@
+<div class="completeList">
+<h1>Producten</h1>
+
+<div class="product-list mat-elevation-z8" *ngIf="hasData()">
+
+    <mat-table #table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="productname">
+            <mat-header-cell *matHeaderCellDef>Product naam</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.productName }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef>Prijs</mat-header-cell>
+            <mat-cell *matCellDef="let element">€{{ element.price }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef>Beschrijving</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="available">
+            <mat-header-cell *matHeaderCellDef>Aantal beschikbaar</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.available }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="soldAmount">
+            <mat-header-cell *matHeaderCellDef>Aantal verkocht</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.soldAmount }}</mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+</div>
+</div>

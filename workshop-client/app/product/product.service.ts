@@ -21,6 +21,11 @@ export class productService
     {
         return this.api.get<product[]>('products');
     }
+
+    public getAllAdmin(): Observable<product[]>
+    {
+        return this.api.get<product[]>('products/admin');
+    }
     
     public getProduct(productnaam): Observable<product[]>{
         if(productnaam == null) {
@@ -43,6 +48,7 @@ export class productService
             },
             error => {
                 alert("Je moet ingelogd zijn om een product te kopen")
+                console.log(data)
             }
         );
     }

@@ -1,4 +1,4 @@
-System.register(["@angular/core", "./list.datasource", "../user.service"], function (exports_1, context_1) {
+System.register(["@angular/core", "./list.datasource", "../product.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["@angular/core", "./list.datasource", "../user.service"], funct
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, list_datasource_1, user_service_1, UserListComponent;
+    var core_1, list_datasource_1, product_service_1, ProductListComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -19,38 +19,38 @@ System.register(["@angular/core", "./list.datasource", "../user.service"], funct
             function (list_datasource_1_1) {
                 list_datasource_1 = list_datasource_1_1;
             },
-            function (user_service_1_1) {
-                user_service_1 = user_service_1_1;
+            function (product_service_1_1) {
+                product_service_1 = product_service_1_1;
             }
         ],
         execute: function () {
-            UserListComponent = /** @class */ (function () {
-                function UserListComponent(userService) {
-                    this.userService = userService;
-                    this.displayedColumns = ['fullName', 'postcode', 'streetnumber', 'emailAddress'];
+            ProductListComponent = /** @class */ (function () {
+                function ProductListComponent(productService) {
+                    this.productService = productService;
+                    this.displayedColumns = ['productname', 'price', 'description', 'available', 'soldAmount'];
                     this.dataSource = null;
-                    this.getUsersList();
+                    this.getProductList();
                 }
-                UserListComponent.prototype.getUsersList = function () {
+                ProductListComponent.prototype.getProductList = function () {
                     var _this = this;
-                    this.userService.getAll().subscribe(function (users) {
-                        _this.dataSource = new list_datasource_1.ListDataSource(users);
+                    this.productService.getAllAdmin().subscribe(function (producten) {
+                        _this.dataSource = new list_datasource_1.ListDataSource(producten);
                     });
                 };
-                UserListComponent.prototype.hasData = function () {
+                ProductListComponent.prototype.hasData = function () {
                     return this.dataSource !== null;
                 };
-                UserListComponent = __decorate([
+                ProductListComponent = __decorate([
                     core_1.Component({
-                        selector: 'user-list',
-                        templateUrl: 'app/user/list/list.component.html',
-                        styleUrls: ['app/user/list/list.component.css'],
+                        selector: 'product-list',
+                        templateUrl: 'app/product/productlist/list.component.html',
+                        styleUrls: ['app/product/productlist/list.component.css'],
                     }),
-                    __metadata("design:paramtypes", [user_service_1.UserService])
-                ], UserListComponent);
-                return UserListComponent;
+                    __metadata("design:paramtypes", [product_service_1.productService])
+                ], ProductListComponent);
+                return ProductListComponent;
             }());
-            exports_1("UserListComponent", UserListComponent);
+            exports_1("ProductListComponent", ProductListComponent);
         }
     };
 });

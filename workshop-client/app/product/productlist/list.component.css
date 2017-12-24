@@ -1,0 +1,5 @@
+.completeList {
+    content: "";
+    clear: both;
+    display: table;
+}

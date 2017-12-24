@@ -46,4 +46,8 @@ export class HeaderComponent
     public goLogin() {
         this.router.navigate(['login'])
     }
+
+    public goProducts() {
+        this.router.navigate(['products'])
+    }
 }
