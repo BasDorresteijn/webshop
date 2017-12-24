@@ -40,7 +40,7 @@ public class ProductDAO {
             while(rs.next()) {
                 Product p = new Product();
                 p.setProductName(rs.getString(1));
-                p.setPrice(rs.getString(2));
+                p.setPrice(rs.getDouble(2));
                 p.setDescription(rs.getString(3));
                 p.setAvailable(rs.getInt(4));
                 p.setSoldAmount(rs.getInt(5));
@@ -62,7 +62,7 @@ public class ProductDAO {
             ResultSet rs = getProduct.executeQuery();
             while(rs.next()) {
                 p.setProductName(rs.getString(1));
-                p.setPrice(rs.getString(2));
+                p.setPrice(rs.getDouble(2));
                 p.setDescription(rs.getString(3));
                 p.setAvailable(rs.getInt(4));
                 p.setSoldAmount(rs.getInt(5));
@@ -78,7 +78,7 @@ public class ProductDAO {
         try {
             PreparedStatement insertProduct = conn.prepareStatement("insert into product values(?,?,?,?,?)");
             insertProduct.setString(1, product.getProductName());
-            insertProduct.setString(2, product.getPrice());
+            insertProduct.setDouble(2, product.getPrice());
             insertProduct.setString(3, product.getDescription());
             insertProduct.setInt(4, product.getAvailable());
             insertProduct.setInt(5, product.getSoldAmount());
@@ -93,7 +93,7 @@ public class ProductDAO {
             PreparedStatement updateProduct = conn.prepareStatement("update product set productname = ?, price = ?, description = ?, "
                     + "available = ?, soldAmount = ? WHERE productname = ?");
             updateProduct.setString(1, product.getProductName());
-            updateProduct.setString(2, product.getPrice());
+            updateProduct.setDouble(2, product.getPrice());
             updateProduct.setString(3, product.getDescription());
             updateProduct.setInt(4, product.getAvailable());
             updateProduct.setInt(5, product.getSoldAmount());            
