@@ -54,7 +54,7 @@ public class CartDAO {
         return null;  
     }
     
-        public ArrayList<Cart> getCarts() {
+    public ArrayList<Cart> getCarts() {
         try {
             PreparedStatement getCarts = conn.prepareStatement("SELECT * FROM cart");
             ResultSet rs = getCarts.executeQuery();
@@ -80,6 +80,7 @@ public class CartDAO {
             PreparedStatement addProductToCart = conn.prepareStatement("INSERT INTO cart VALUES(?, ?)");
             addProductToCart.setString(1, fullname);
             addProductToCart.setString(2, product);
+            addProductToCart.execute();
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

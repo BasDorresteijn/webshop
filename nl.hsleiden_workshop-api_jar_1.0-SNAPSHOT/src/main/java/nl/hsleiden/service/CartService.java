@@ -9,6 +9,7 @@ import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import nl.hsleiden.model.Cart;
+import nl.hsleiden.model.User;
 import nl.hsleiden.persistence.CartDAO;
 
 /**
@@ -31,6 +32,11 @@ public class CartService {
 
     public Cart getCart(String fullname) {
         return cartDAO.getCart(fullname);
+    }
+    
+    public void addProduct(String productnaam, User user) {
+        cartDAO.addProduct(productnaam, user.getFullName());
+        System.out.println("Cool bro " + user);
     }
     
 }

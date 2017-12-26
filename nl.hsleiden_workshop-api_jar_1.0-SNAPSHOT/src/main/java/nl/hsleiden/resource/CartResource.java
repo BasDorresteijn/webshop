@@ -6,17 +6,21 @@
 package nl.hsleiden.resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import io.dropwizard.auth.Auth;
 import java.util.Collection;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import nl.hsleiden.View;
 import nl.hsleiden.model.Cart;
+import nl.hsleiden.model.User;
 import nl.hsleiden.service.CartService;
 
 /**
@@ -44,9 +48,18 @@ public class CartResource {
     }
     
     @GET 
-    @JsonView(View.Private.class)
+    @JsonView(View.Protected.class)
     @Path("/{fullname}")
     public Cart getCart(@PathParam("fullname") String fullname){
         return cartService.getCart(fullname);
     }
+    
+    @POST
+    @Path("/addProduct")
+    public void addProduct(@QueryParam("productName") String productName, @Auth User user) {
+        cartService.addProduct(productName, user);
+    }
+    
+    
+    
 }
