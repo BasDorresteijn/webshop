@@ -1,11 +1,11 @@
+import { User } from "../user/user";
+import { Product } from "../product/product";
+
 export class Cart
 {
     constructor(
-        public productName?: String,
-        public price?: number,
-        public description?: String,
-        public available?: number,
-        public soldAmount?: number,
+        public user?: User,
+        public products?: Array<Product>
     ) {
 
     }

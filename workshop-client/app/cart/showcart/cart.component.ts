@@ -5,6 +5,9 @@ import { Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Directive } from '@angular/core'
 
+import { CartService } from '../cart.service'
+import { Cart } from '../cart';
+
 
 @Component({
     selector: 'cart',
@@ -13,5 +16,19 @@ import { Directive } from '@angular/core'
 })
 export class CartComponent
 { 
+    private cart: Cart
+
+    constructor(private cartService: CartService) {
+        this.getCart()
+    }
     
+    public getCart() {
+        this.cartService.getCart().subscribe(
+            data => {
+                this.cart = <Cart> data;
+                console.log(this.cart)
+            }
+        )
+    }
+
 }

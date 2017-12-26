@@ -1,4 +1,4 @@
-System.register(["@angular/core", "../public.module", "../user/user.module", "./showcart/cart.component", "./cart.service"], function (exports_1, context_1) {
+System.register(["@angular/core", "../public.module", "../user/user.module", "./showcart/cart.component", "./cart.service", "./cartitemlist/list.component"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, public_module_1, user_module_1, cart_component_1, cart_service_1, CartModule;
+    var core_1, public_module_1, user_module_1, cart_component_1, cart_service_1, list_component_1, CartModule;
     return {
         setters: [
             function (core_1_1) {
@@ -24,6 +24,9 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
             },
             function (cart_service_1_1) {
                 cart_service_1 = cart_service_1_1;
+            },
+            function (list_component_1_1) {
+                list_component_1 = list_component_1_1;
             }
         ],
         execute: function () {
@@ -33,8 +36,8 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
                 CartModule = __decorate([
                     core_1.NgModule({
                         imports: [public_module_1.PublicModule, user_module_1.UserModule],
-                        declarations: [cart_component_1.CartComponent],
-                        exports: [cart_component_1.CartComponent],
+                        declarations: [cart_component_1.CartComponent, list_component_1.CartListComponent],
+                        exports: [cart_component_1.CartComponent, list_component_1.CartListComponent],
                         providers: [cart_service_1.CartService]
                     })
                 ], CartModule);

@@ -1,4 +1,4 @@
-System.register(["@angular/core", "../cart.service"], function (exports_1, context_1) {
+System.register(["@angular/core", "./list.datasource", "../cart.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,41 +10,53 @@ System.register(["@angular/core", "../cart.service"], function (exports_1, conte
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, cart_service_1, CartComponent;
+    var core_1, list_datasource_1, cart_service_1, CartListComponent;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (list_datasource_1_1) {
+                list_datasource_1 = list_datasource_1_1;
             },
             function (cart_service_1_1) {
                 cart_service_1 = cart_service_1_1;
             }
         ],
         execute: function () {
-            CartComponent = /** @class */ (function () {
-                function CartComponent(cartService) {
+            CartListComponent = /** @class */ (function () {
+                function CartListComponent(cartService) {
                     this.cartService = cartService;
-                    this.getCart();
+                    this.displayedColumns = ['productname', 'price', 'description', 'removeProduct'];
+                    this.dataSource = null;
+                    this.getProductList();
                 }
-                CartComponent.prototype.getCart = function () {
+                CartListComponent.prototype.getProductList = function () {
                     var _this = this;
                     this.cartService.getCart().subscribe(function (data) {
                         _this.cart = data;
                         console.log(_this.cart);
+                        _this.dataSource = new list_datasource_1.ListDataSource(_this.cart.products);
                     });
                 };
-                CartComponent = __decorate([
+                CartListComponent.prototype.hasData = function () {
+                    return this.dataSource !== null;
+                };
+                CartListComponent.prototype.removeItem = function (product) {
+                    this.cartService;
+                };
+                CartListComponent = __decorate([
                     core_1.Component({
-                        selector: 'cart',
-                        templateUrl: 'app/cart/showcart/cart.component.html',
-                        styleUrls: ['app/cart/showcart/cart.component.css'],
+                        selector: 'cart-product-list',
+                        templateUrl: 'app/cart/cartitemlist/list.component.html',
+                        styleUrls: ['app/cart/cartitemlist/list.component.css'],
                     }),
                     __metadata("design:paramtypes", [cart_service_1.CartService])
-                ], CartComponent);
-                return CartComponent;
+                ], CartListComponent);
+                return CartListComponent;
             }());
-            exports_1("CartComponent", CartComponent);
+            exports_1("CartListComponent", CartListComponent);
         }
     };
 });
-//# sourceMappingURL=cart.component.js.map
+//# sourceMappingURL=list.component.js.map

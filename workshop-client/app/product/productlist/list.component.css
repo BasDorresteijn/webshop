@@ -1,5 +1,3 @@
 .completeList {
-    content: "";
-    clear: both;
-    display: table;
+    overflow: auto;
 }

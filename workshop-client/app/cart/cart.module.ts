@@ -5,11 +5,12 @@ import { PublicModule } from '../public.module';
 import { UserModule } from '../user/user.module';
 import { CartComponent } from './showcart/cart.component';
 import { CartService } from './cart.service';
+import { CartListComponent } from './cartitemlist/list.component';
 
 @NgModule({
     imports: [ PublicModule, UserModule ],
-    declarations: [ CartComponent ],
-    exports: [ CartComponent ],
+    declarations: [ CartComponent, CartListComponent ],
+    exports: [ CartComponent, CartListComponent ],
     providers: [ CartService ]
 })
 export class CartModule { 

@@ -6,12 +6,9 @@ System.register([], function (exports_1, context_1) {
         setters: [],
         execute: function () {
             Cart = /** @class */ (function () {
-                function Cart(productName, price, description, available, soldAmount) {
-                    this.productName = productName;
-                    this.price = price;
-                    this.description = description;
-                    this.available = available;
-                    this.soldAmount = soldAmount;
+                function Cart(user, products) {
+                    this.user = user;
+                    this.products = products;
                 }
                 return Cart;
             }());

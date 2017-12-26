@@ -45,10 +45,10 @@ export class ProductService
         this.api.put<void>("products", data).subscribe(
             data => {
                 product.available = product.available-1
+                this.api.post<void>("carts/addProduct", null  ,"?productName=" + product.productName).subscribe()
             },
             error => {
                 alert("Je moet ingelogd zijn om een product te kopen")
-                console.log(data)
             }
         );
     }
