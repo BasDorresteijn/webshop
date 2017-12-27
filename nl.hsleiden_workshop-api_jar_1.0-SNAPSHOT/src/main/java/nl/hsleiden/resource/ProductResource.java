@@ -22,7 +22,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import nl.hsleiden.View;
 import nl.hsleiden.model.Product;
-import nl.hsleiden.model.User;
 import nl.hsleiden.service.ProductService;
 
 /**

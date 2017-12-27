@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import nl.hsleiden.model.Cart;
 import nl.hsleiden.model.Product;
+import nl.hsleiden.model.User;
 
 /**
  *
@@ -74,10 +75,24 @@ public class CartDAO {
         return null;
     }
     
+    public double getTotalPrice(User user) {
+        try {
+            PreparedStatement getPrice = conn.prepareStatement("SELECT sum(product.price) FROM cart JOIN product "
+                    + "ON cart.product_productname = product.productname WHERE cart.user_fullname = ?");
+            getPrice.setString(1, user.getFullName());
+            ResultSet rs = getPrice.executeQuery();
+            rs.next();
+            return rs.getDouble(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
     
     public void addProduct(String product, String fullname) {
         try {
-            PreparedStatement addProductToCart = conn.prepareStatement("INSERT INTO cart VALUES(?, ?)");
+            PreparedStatement addProductToCart = conn.prepareStatement("INSERT INTO cart (user_fullname, product_productname) VALUES(?, ?)");
             addProductToCart.setString(1, fullname);
             addProductToCart.setString(2, product);
             addProductToCart.execute();
@@ -109,10 +124,16 @@ public class CartDAO {
     
     public void removeProductFromCart(String fullname, String product) {
         try {
-            PreparedStatement removeProductFromCart = conn.prepareStatement("DELETE from cart where user_fullname = ? AND product_productname = ?");
+            PreparedStatement removeProductFromCart = conn.prepareStatement("SELECT min(id) from cart where user_fullname = ? AND product_productname = ?");
             removeProductFromCart.setString(1, fullname);
             removeProductFromCart.setString(2, product);
-            removeProductFromCart.execute();
+            ResultSet rs = removeProductFromCart.executeQuery();
+            rs.next();
+            
+            PreparedStatement removeProductFromCart2 = conn.prepareStatement("DELETE from cart where id = ?");
+            removeProductFromCart2.setInt(1, rs.getInt(1));
+            removeProductFromCart2.execute();
+            
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

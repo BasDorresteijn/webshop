@@ -36,7 +36,14 @@ public class CartService {
     
     public void addProduct(String productnaam, User user) {
         cartDAO.addProduct(productnaam, user.getFullName());
-        System.out.println("Cool bro " + user);
+    }
+    
+    public void removeProduct(String productnaam, User user) {
+        cartDAO.removeProductFromCart(user.getFullName(), productnaam);
+    }
+    
+    public double getPrice(User user) {
+        return cartDAO.getTotalPrice(user);
     }
     
 }

@@ -11,6 +11,7 @@ import java.util.Collection;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -20,6 +21,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import nl.hsleiden.View;
 import nl.hsleiden.model.Cart;
+import nl.hsleiden.model.Product;
 import nl.hsleiden.model.User;
 import nl.hsleiden.service.CartService;
 
@@ -54,12 +56,21 @@ public class CartResource {
         return cartService.getCart(fullname);
     }
     
+    @GET
+    @Path("/price")
+    public double getPrice(@Auth User user) {
+        return cartService.getPrice(user);
+    }
+    
     @POST
     @Path("/addProduct")
     public void addProduct(@QueryParam("productName") String productName, @Auth User user) {
         cartService.addProduct(productName, user);
     }
     
-    
+    @DELETE
+    public void removeProduct(@QueryParam("productName") String productName, @Auth User user){
+        cartService.removeProduct(productName, user);
+    }
     
 }
