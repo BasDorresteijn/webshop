@@ -38,7 +38,7 @@ System.register(["@angular/core", "../product.service"], function (exports_1, co
                     return this.producten !== null;
                 };
                 ProductComponent.prototype.buyProduct = function (product) {
-                    this.service.updateProduct(product);
+                    this.service.buyProduct(product);
                 };
                 ProductComponent = __decorate([
                     core_1.Component({

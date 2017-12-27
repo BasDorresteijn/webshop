@@ -38,6 +38,6 @@ export class ProductComponent
     }
 
     public buyProduct(product: Product) {
-        this.service.updateProduct(product)
+        this.service.buyProduct(product)
     }
 }

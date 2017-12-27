@@ -34,7 +34,24 @@ System.register(["@angular/core", "../shared/api.service", "../shared/authorizat
                     return this.api.get('carts/' + this.user.fullName);
                 };
                 CartService.prototype.removeProductFromCart = function (product) {
-                    // this.api.delete<void>("cool");
+                    this.api.delete("carts", "?productName=" + product.productName).subscribe(function (data) {
+                    }, function (error) {
+                    });
+                };
+                CartService.prototype.unbuyProduct = function (product) {
+                    var data = {
+                        productName: product.productName,
+                        price: product.price,
+                        description: product.description,
+                        available: (product.available + 1)
+                    };
+                    this.api.put("products", data).subscribe(function (data) {
+                    }, function (error) {
+                        alert("Je moet ingelogd zijn om een product te kopen");
+                    });
+                };
+                CartService.prototype.getTotalPrice = function () {
+                    return this.api.get("carts/price");
                 };
                 CartService = __decorate([
                     core_1.Injectable(),

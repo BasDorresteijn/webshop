@@ -30,7 +30,6 @@ System.register(["@angular/core", "../cart.service"], function (exports_1, conte
                     var _this = this;
                     this.cartService.getCart().subscribe(function (data) {
                         _this.cart = data;
-                        console.log(_this.cart);
                     });
                 };
                 CartComponent = __decorate([

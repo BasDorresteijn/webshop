@@ -34,7 +34,7 @@ export class ProductService
         return this.api.get<Product[]>('products/' + productnaam);
     }
 
-    public updateProduct(product: Product) {
+    public buyProduct(product: Product) {
         let data = {
             productName: product.productName,
             price: product.price,
@@ -45,7 +45,12 @@ export class ProductService
         this.api.put<void>("products", data).subscribe(
             data => {
                 product.available = product.available-1
-                this.api.post<void>("carts/addProduct", null  ,"?productName=" + product.productName).subscribe()
+                this.api.post<void>("carts/addProduct", null  ,"?productName=" + product.productName).subscribe( data => {
+                    
+                },
+                error => {
+                    alert("Er is iets fout gegaan")
+                })
             },
             error => {
                 alert("Je moet ingelogd zijn om een product te kopen")

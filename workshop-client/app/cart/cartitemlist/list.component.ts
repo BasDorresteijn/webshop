@@ -16,7 +16,8 @@ export class CartListComponent
     public displayedColumns = ['productname', 'price', 'description', 'removeProduct'];
     public dataSource = null;
     private cart : Cart;
-    
+    private totalPrice : number = 0;
+
     constructor(private cartService : CartService)
     {
         this.getProductList();
@@ -27,10 +28,18 @@ export class CartListComponent
         this.cartService.getCart().subscribe(
             data => {
                 this.cart = <Cart> data;
-                console.log(this.cart)
                 this.dataSource = new ListDataSource(this.cart.products);
+                this.getPrice();
             }
         );
+    }
+
+    private getPrice() {
+        this.cartService.getTotalPrice().subscribe(
+            data => {
+                this.totalPrice = data
+            }
+        )
     }
     
     public hasData()
@@ -39,6 +48,9 @@ export class CartListComponent
     }
 
     public removeItem(product : Product) {
-        this.cartService
+        this.cartService.removeProductFromCart(product)
+        this.cartService.unbuyProduct(product)
+        this.getProductList()
+        this.getProductList()
     }
 }

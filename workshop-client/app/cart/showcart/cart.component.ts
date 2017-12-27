@@ -26,7 +26,6 @@ export class CartComponent
         this.cartService.getCart().subscribe(
             data => {
                 this.cart = <Cart> data;
-                console.log(this.cart)
             }
         )
     }

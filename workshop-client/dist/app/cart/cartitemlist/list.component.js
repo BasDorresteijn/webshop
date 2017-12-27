@@ -29,21 +29,31 @@ System.register(["@angular/core", "./list.datasource", "../cart.service"], funct
                     this.cartService = cartService;
                     this.displayedColumns = ['productname', 'price', 'description', 'removeProduct'];
                     this.dataSource = null;
+                    this.totalPrice = 0;
                     this.getProductList();
                 }
                 CartListComponent.prototype.getProductList = function () {
                     var _this = this;
                     this.cartService.getCart().subscribe(function (data) {
                         _this.cart = data;
-                        console.log(_this.cart);
                         _this.dataSource = new list_datasource_1.ListDataSource(_this.cart.products);
+                        _this.getPrice();
+                    });
+                };
+                CartListComponent.prototype.getPrice = function () {
+                    var _this = this;
+                    this.cartService.getTotalPrice().subscribe(function (data) {
+                        _this.totalPrice = data;
                     });
                 };
                 CartListComponent.prototype.hasData = function () {
                     return this.dataSource !== null;
                 };
                 CartListComponent.prototype.removeItem = function (product) {
-                    this.cartService;
+                    this.cartService.removeProductFromCart(product);
+                    this.cartService.unbuyProduct(product);
+                    this.getProductList();
+                    this.getProductList();
                 };
                 CartListComponent = __decorate([
                     core_1.Component({

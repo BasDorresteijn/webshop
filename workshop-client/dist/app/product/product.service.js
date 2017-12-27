@@ -45,7 +45,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     }
                     return this.api.get('products/' + productnaam);
                 };
-                ProductService.prototype.updateProduct = function (product) {
+                ProductService.prototype.buyProduct = function (product) {
                     var _this = this;
                     var data = {
                         productName: product.productName,
@@ -55,7 +55,10 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     };
                     this.api.put("products", data).subscribe(function (data) {
                         product.available = product.available - 1;
-                        _this.api.post("carts/addProduct", null, "?productName=" + product.productName).subscribe();
+                        _this.api.post("carts/addProduct", null, "?productName=" + product.productName).subscribe(function (data) {
+                        }, function (error) {
+                            alert("Er is iets fout gegaan");
+                        });
                     }, function (error) {
                         alert("Je moet ingelogd zijn om een product te kopen");
                     });
