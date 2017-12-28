@@ -45,6 +45,13 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     }
                     return this.api.get('products/' + productnaam);
                 };
+                ProductService.prototype.editProduct = function (product) {
+                    this.selectedProduct = product;
+                    this.router.navigate(["products/edit"]);
+                };
+                ProductService.prototype.getSelectedProduct = function () {
+                    return this.selectedProduct;
+                };
                 ProductService.prototype.buyProduct = function (product) {
                     var _this = this;
                     var data = {
@@ -53,7 +60,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                         description: product.description,
                         available: (product.available - 1)
                     };
-                    this.api.put("products", data).subscribe(function (data) {
+                    this.api.put("products/buy", data, "?productname=" + product.productName).subscribe(function (data) {
                         product.available = product.available - 1;
                         _this.api.post("carts/addProduct", null, "?productName=" + product.productName).subscribe(function (data) {
                         }, function (error) {
@@ -62,6 +69,37 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     }, function (error) {
                         alert("Je moet ingelogd zijn om een product te kopen");
                     });
+                };
+                ProductService.prototype.create = function (product) {
+                    var _this = this;
+                    var data = {
+                        productName: product.productName,
+                        price: product.price.toFixed(2),
+                        description: product.description,
+                        available: product.available
+                    };
+                    this.api.post("products", data).subscribe(function (data) {
+                        _this.router.navigate(["/products"]);
+                    }, function (error) {
+                        alert("Er is iets fout gegaan.");
+                    });
+                };
+                ProductService.prototype.update = function (productname, product) {
+                    var _this = this;
+                    var data = {
+                        productName: product.productName,
+                        price: product.price.toFixed(2),
+                        description: product.description,
+                        available: product.available
+                    };
+                    this.api.put("products", data, "?productname=" + productname).subscribe(function (data) {
+                        _this.router.navigate(["/products"]);
+                    }, function (error) {
+                        alert("Er is iets fout gegaan.");
+                    });
+                };
+                ProductService.prototype.removeProduct = function (product) {
+                    this.api.delete("products/" + product.productName).subscribe();
                 };
                 ProductService = __decorate([
                     core_1.Injectable(),

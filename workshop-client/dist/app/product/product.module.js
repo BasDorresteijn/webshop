@@ -1,4 +1,4 @@
-System.register(["@angular/core", "../public.module", "../user/user.module", "./showproduct/product.component", "./productlist/list.component", "./product.service"], function (exports_1, context_1) {
+System.register(["@angular/core", "../public.module", "../user/user.module", "./showproduct/product.component", "./productlist/list.component", "./product.service", "./addproduct/addproduct.component", "@angular/forms", "./editproduct/editproduct.component"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, public_module_1, user_module_1, product_component_1, list_component_1, product_service_1, ProductModule;
+    var core_1, public_module_1, user_module_1, product_component_1, list_component_1, product_service_1, addproduct_component_1, forms_1, editproduct_component_1, ProductModule;
     return {
         setters: [
             function (core_1_1) {
@@ -27,6 +27,15 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
             },
             function (product_service_1_1) {
                 product_service_1 = product_service_1_1;
+            },
+            function (addproduct_component_1_1) {
+                addproduct_component_1 = addproduct_component_1_1;
+            },
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
+            },
+            function (editproduct_component_1_1) {
+                editproduct_component_1 = editproduct_component_1_1;
             }
         ],
         execute: function () {
@@ -35,9 +44,9 @@ System.register(["@angular/core", "../public.module", "../user/user.module", "./
                 }
                 ProductModule = __decorate([
                     core_1.NgModule({
-                        imports: [public_module_1.PublicModule, user_module_1.UserModule],
-                        declarations: [product_component_1.ProductComponent, list_component_1.ProductListComponent],
-                        exports: [product_component_1.ProductComponent, list_component_1.ProductListComponent],
+                        imports: [public_module_1.PublicModule, user_module_1.UserModule, forms_1.FormsModule, forms_1.ReactiveFormsModule],
+                        declarations: [product_component_1.ProductComponent, list_component_1.ProductListComponent, addproduct_component_1.AddProductComponent, editproduct_component_1.EditProductComponent],
+                        exports: [product_component_1.ProductComponent, list_component_1.ProductListComponent, addproduct_component_1.AddProductComponent, editproduct_component_1.EditProductComponent],
                         providers: [product_service_1.ProductService]
                     })
                 ], ProductModule);

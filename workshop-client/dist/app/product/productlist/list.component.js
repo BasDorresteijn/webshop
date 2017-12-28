@@ -40,6 +40,21 @@ System.register(["@angular/core", "./list.datasource", "../product.service"], fu
                 ProductListComponent.prototype.hasData = function () {
                     return this.dataSource !== null;
                 };
+                ProductListComponent.prototype.selectRow = function (product) {
+                    this.selectedproduct = product;
+                    this.selectedproductName = product.productName;
+                };
+                ProductListComponent.prototype.editProduct = function () {
+                    this.productService.editProduct(this.selectedproduct);
+                };
+                ProductListComponent.prototype.deleteProduct = function () {
+                    this.productService.removeProduct(this.selectedproduct);
+                    this.getProductList();
+                    this.getProductList();
+                };
+                ProductListComponent.prototype.showButtons = function () {
+                    return this.selectedproduct != null;
+                };
                 ProductListComponent = __decorate([
                     core_1.Component({
                         selector: 'product-list',

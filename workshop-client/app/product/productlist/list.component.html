@@ -31,9 +31,19 @@
         </ng-container>
         
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns; let element" (click)="selectRow(element)" [ngClass]="{selected: element.productName === selectedproductName}"></mat-row>
 
     </mat-table>
 
+    <div *ngIf="showButtons()" id="floatleft">
+        <button mat-raised-button class="mat-primary" (click)="editProduct()">Edit product</button>
+        <button mat-raised-button class="mat-warn" (click)="deleteProduct()">Verwijder product</button>
+    </div>
+
+    <div id="floatright">
+        <button mat-raised-button class="mat-primary" routerLink="/products/add">Nieuw product toevoegen</button>
+    </div>
+
 </div>
+
 </div>

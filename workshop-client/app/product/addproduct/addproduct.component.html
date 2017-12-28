@@ -1,0 +1,49 @@
+<mat-card>
+
+    <mat-card-header>
+        <mat-card-title>
+            <h1>Aanmaken product</h1>
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <form name="addProductForm" #registerForm="ngForm" [formGroup]="addProductForm" (ngSubmit)="createProduct()">
+
+            <mat-form-field class="full-width">
+                <input matInput type="text" name="productName" placeholder="Productnaam" required [(ngModel)]="product.productName" formControlName="productName" #productName/>
+                <mat-error [hidden]="productName.valid">
+                    Dit veld is verplicht
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <input matInput type="number" name="price" placeholder="Prijs (in euros)" required [(ngModel)]="product.price" formControlName="price" #price/>
+                <mat-error [hidden]="price.valid">
+                    Dit veld is verplicht
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <textarea matInput type="text" name="description" placeholder="beschrijving van het product" [(ngModel)]="product.description" formControlName="description" #description></textarea>
+                <mat-error [hidden]="description.valid">
+                    Dit veld is verplicht
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <input matInput type="number" name="available" placeholder="aantal producten beschikbaar" required [(ngModel)]="product.available" formControlName="available" #available/>
+                <mat-error [hidden]="available.valid">
+                    Dit veld is verplicht
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button type="submit" class="mat-primary" [disabled]="!addProductForm.valid">Creër product</button>
+            <button mat-raised-button class="mat-warn" routerLink="/products" >Annuleren</button>
+
+        </form>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+
+    </mat-card-actions>
+
+</mat-card>

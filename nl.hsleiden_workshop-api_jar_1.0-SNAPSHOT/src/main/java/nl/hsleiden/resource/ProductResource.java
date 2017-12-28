@@ -19,6 +19,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import nl.hsleiden.View;
 import nl.hsleiden.model.Product;
@@ -72,9 +73,17 @@ public class ProductResource {
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed("ADMIN")
+    public void updateProduct(@Valid Product product, @QueryParam("productname") String productName) {
+        productService.updateProduct(productName, product);
+    }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     @RolesAllowed("GUEST")
-    public void updateProduct(@Valid Product product) {
-        productService.updateProduct(product.getProductName(), product);
+    @Path("/buy")
+    public void buyProduct(@Valid Product product, @QueryParam("productname") String productName) {
+        productService.buy(productName, product);
     }
     
     @DELETE 

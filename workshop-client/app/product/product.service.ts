@@ -11,6 +11,8 @@ import { Product } from './product';
 @Injectable()
 export class ProductService
 {
+    private selectedProduct?: Product;
+
     constructor(private api: ApiService,
         private authService: AuthorizationService,
         private router: Router)
@@ -34,6 +36,15 @@ export class ProductService
         return this.api.get<Product[]>('products/' + productnaam);
     }
 
+    public editProduct(product) {
+        this.selectedProduct = product;
+        this.router.navigate(["products/edit"])
+    }
+
+    public getSelectedProduct() {
+        return this.selectedProduct
+    }
+
     public buyProduct(product: Product) {
         let data = {
             productName: product.productName,
@@ -42,7 +53,7 @@ export class ProductService
             available: (product.available-1)
         };
 
-        this.api.put<void>("products", data).subscribe(
+        this.api.put<void>("products/buy", data, "?productname="+product.productName).subscribe(
             data => {
                 product.available = product.available-1
                 this.api.post<void>("carts/addProduct", null  ,"?productName=" + product.productName).subscribe( data => {
@@ -56,5 +67,48 @@ export class ProductService
                 alert("Je moet ingelogd zijn om een product te kopen")
             }
         );
+    }
+
+    public create(product : Product) {
+
+        let data = {
+            productName: product.productName,
+            price: product.price.toFixed(2),
+            description: product.description,
+            available: product.available
+        };
+
+        this.api.post<void>("products", data).subscribe(
+            data => {
+                this.router.navigate(["/products"])
+            },
+            error => {
+                alert("Er is iets fout gegaan.")
+            }
+        );
+    }
+
+    public update(productname: String, product : Product) {
+        let data = {
+            productName: product.productName,
+            price: product.price.toFixed(2),
+            description: product.description,
+            available: product.available
+        };
+
+        this.api.put<void>("products", data, "?productname=" + productname).subscribe(
+            data => {
+                this.router.navigate(["/products"])
+            },
+            error => {
+                alert("Er is iets fout gegaan.")
+            }
+        );
+    }
+
+    public removeProduct(product : Product) {
+        this.api.delete<void>("products/" + product.productName).subscribe(
+
+        )
     }
 }

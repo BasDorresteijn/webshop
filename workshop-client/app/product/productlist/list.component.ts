@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { ListDataSource } from './list.datasource';
 import { ProductService } from '../product.service';
 
+import { Product } from '../product'
+
 @Component({
     selector: 'product-list',
     templateUrl: 'app/product/productlist/list.component.html',
@@ -13,6 +15,8 @@ export class ProductListComponent
 {
     public displayedColumns = ['productname', 'price', 'description', 'available', 'soldAmount'];
     public dataSource = null;
+    private selectedproduct?: Product;
+    private selectedproductName?: String;
     
     constructor(private productService : ProductService)
     {
@@ -32,5 +36,24 @@ export class ProductListComponent
     public hasData()
     {
         return this.dataSource !== null;
+    }
+
+    private selectRow(product: Product) {
+        this.selectedproduct = product;
+        this.selectedproductName = product.productName;
+    }
+
+    private editProduct() {
+        this.productService.editProduct(this.selectedproduct)
+    }
+
+    private deleteProduct() {
+        this.productService.removeProduct(this.selectedproduct)
+        this.getProductList()
+        this.getProductList()
+    }
+
+    private showButtons() {
+        return this.selectedproduct != null
     }
 }

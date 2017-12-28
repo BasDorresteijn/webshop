@@ -34,16 +34,13 @@ public class ProductService {
     }
     
     public void updateProduct(String productnaam, Product product) {
-        if(product.getSoldAmount() < 0 || product.getAvailable() < 0) {
-            throw new ForbiddenException("Dit product is al op lol");
-        }
-        
-        if(product.getSoldAmount() == 0) {
-            productDAO.buy(productnaam, product);
-        } else {
-            productDAO.update(productnaam, product);
-        }
+        productDAO.update(productnaam, product);
     }
+    
+    public void buy(String productnaam, Product product) {
+        productDAO.buy(productnaam, product);
+    }
+    
     
     public void addProduct(Product product) {
         productDAO.add(product);

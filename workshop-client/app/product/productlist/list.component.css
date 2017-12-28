@@ -1,3 +1,15 @@
 .completeList {
     overflow: auto;
 }
+
+.selected {
+    background: rgb(157, 170, 241);
+}
+
+#floatright {
+    float: right;
+}
+
+#floatleft {
+    float: left;
+}
