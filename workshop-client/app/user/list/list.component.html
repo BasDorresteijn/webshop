@@ -8,25 +8,25 @@
             <mat-header-cell *matHeaderCellDef>Naam</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.fullName }}</mat-cell>
         </ng-container>
-
-        <ng-container matColumnDef="postcode">
-            <mat-header-cell *matHeaderCellDef>Postcode</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.postcode }}</mat-cell>
-        </ng-container>
-        
-        <ng-container matColumnDef="streetnumber">
-            <mat-header-cell *matHeaderCellDef>Huisnummer</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.streetnumber }}</mat-cell>
-        </ng-container>
         
         <ng-container matColumnDef="emailAddress">
             <mat-header-cell *matHeaderCellDef>E-mailadres</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.emailAddress }}</mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="admin">
+            <mat-header-cell *matHeaderCellDef>Admin</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.roles[1] == "ADMIN"}}</mat-cell>
+        </ng-container>
         
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns; let element" (click)="selectRow(element)" [ngClass]="{selected: element.fullName === selectedfullName}"></mat-row>
 
     </mat-table>
+
+    <div *ngIf="showButtons()" id="floatleft">
+        <button mat-raised-button *ngIf="!admin" class="mat-primary" (click)="makeAdmin()">mod persoon</button>
+        <button mat-raised-button *ngIf="admin" class="mat-warn" (click)="unAdmin()">unmod persoon</button>
+    </div>
 
 </div>

@@ -14,7 +14,7 @@ import { error } from 'util';
 @Injectable()
 export class CartService
 {
-    private user: User;
+    private user?: User;
     private totalPrice: Number;
 
     constructor(private api: ApiService, private autorizationService: AuthorizationService) {
@@ -22,6 +22,7 @@ export class CartService
     }
 
     public getCart(): Observable<Cart[]>{
+        this.user = this.autorizationService.getAuthenticator()
         return this.api.get<Cart[]>('carts/' + this.user.fullName);
     }
 

@@ -31,6 +31,7 @@ System.register(["@angular/core", "../shared/api.service", "../shared/authorizat
                     this.user = this.autorizationService.getAuthenticator();
                 }
                 CartService.prototype.getCart = function () {
+                    this.user = this.autorizationService.getAuthenticator();
                     return this.api.get('carts/' + this.user.fullName);
                 };
                 CartService.prototype.removeProductFromCart = function (product) {

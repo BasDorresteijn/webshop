@@ -38,7 +38,7 @@ System.register(["@angular/core", "../public.module", "../shared/shared.module",
                 }
                 UserModule = __decorate([
                     core_1.NgModule({
-                        imports: [public_module_1.PublicModule, shared_module_1.SharedModule],
+                        imports: [public_module_1.PublicModule, shared_module_1.SharedModule,],
                         exports: [login_component_1.LoginComponent],
                         declarations: [register_component_1.RegisterComponent, login_component_1.LoginComponent, list_component_1.UserListComponent],
                         providers: [user_service_1.UserService]

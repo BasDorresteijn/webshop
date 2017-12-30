@@ -21,7 +21,7 @@ System.register(["@angular/core", "rxjs/Subject"], function (exports_1, context_
             }
         ],
         execute: function () {
-            AuthorizationService = (function () {
+            AuthorizationService = /** @class */ (function () {
                 function AuthorizationService() {
                     this.login = null;
                     this.password = null;
@@ -78,12 +78,12 @@ System.register(["@angular/core", "rxjs/Subject"], function (exports_1, context_
                 AuthorizationService.prototype.setAuthenticator = function (authenticator) {
                     this.authenticator = authenticator;
                 };
+                AuthorizationService = __decorate([
+                    core_1.Injectable(),
+                    __metadata("design:paramtypes", [])
+                ], AuthorizationService);
                 return AuthorizationService;
             }());
-            AuthorizationService = __decorate([
-                core_1.Injectable(),
-                __metadata("design:paramtypes", [])
-            ], AuthorizationService);
             exports_1("AuthorizationService", AuthorizationService);
         }
     };

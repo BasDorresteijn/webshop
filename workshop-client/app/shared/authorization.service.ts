@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { User } from '../user/user';
 
 @Injectable()
 export class AuthorizationService
@@ -8,6 +9,7 @@ export class AuthorizationService
     private login: string = null;
     private password: string = null;
     private authenticator: Object = null;
+    private admin : Boolean;
     
     public authorized$ = new Subject<boolean>();
     
@@ -93,4 +95,5 @@ export class AuthorizationService
     {
         this.authenticator = authenticator;
     }
+
 }

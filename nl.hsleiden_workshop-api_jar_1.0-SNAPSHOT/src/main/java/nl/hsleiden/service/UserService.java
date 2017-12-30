@@ -1,5 +1,6 @@
 package nl.hsleiden.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -24,6 +25,18 @@ public class UserService extends BaseService<User>
     public Collection<User> getAll()
     {
         return dao.getAll();
+    }
+    
+    public Collection<User> getAll(User user)
+    {
+        Collection<User> users = new ArrayList<User>();
+        for(User user1 : dao.getAll()) {
+            if(user1.getFullName().equals(user.getFullName())) {
+                continue;
+            }
+            users.add(user1);
+        }
+        return users;
     }
     
     public User get(String fullname)

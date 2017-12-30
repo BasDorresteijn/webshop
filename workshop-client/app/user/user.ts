@@ -6,7 +6,8 @@ export class User
         public postcode?: string,
         public streetnumber?: string,
         public emailAddress?: string,
-        public password?: string)
+        public password?: string,
+        public roles?: String[])
     {
         
     }

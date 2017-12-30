@@ -28,11 +28,14 @@ export class CartListComponent
         this.cartService.getCart().subscribe(
             data => {
                 this.cart = <Cart> data;
+                console.log(this.cart)
                 this.dataSource = new ListDataSource(this.cart.products);
                 this.getPrice();
             }
         );
     }
+
+    
 
     private getPrice() {
         this.cartService.getTotalPrice().subscribe(

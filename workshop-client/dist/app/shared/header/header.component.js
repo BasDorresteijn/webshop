@@ -54,6 +54,18 @@ System.register(["@angular/core", "@angular/router", "../authorization.service"]
                 HeaderComponent.prototype.goCart = function () {
                     this.router.navigate(['cart']);
                 };
+                HeaderComponent.prototype.isadmin = function () {
+                    this.user = this.authService.getAuthenticator();
+                    if (this.user == null) {
+                        return false;
+                    }
+                    if (this.user.roles[1] == "ADMIN") {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                };
                 HeaderComponent = __decorate([
                     core_1.Component({
                         selector: 'app-header',

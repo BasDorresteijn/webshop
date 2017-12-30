@@ -27,18 +27,47 @@ System.register(["@angular/core", "./list.datasource", "../user.service"], funct
             UserListComponent = /** @class */ (function () {
                 function UserListComponent(userService) {
                     this.userService = userService;
-                    this.displayedColumns = ['fullName', 'postcode', 'streetnumber', 'emailAddress'];
+                    this.displayedColumns = ['fullName', 'emailAddress', 'admin'];
                     this.dataSource = null;
+                    this.admin = false;
                     this.getUsersList();
                 }
                 UserListComponent.prototype.getUsersList = function () {
                     var _this = this;
-                    this.userService.getAll().subscribe(function (users) {
+                    this.userService.getAllAdmin().subscribe(function (users) {
                         _this.dataSource = new list_datasource_1.ListDataSource(users);
                     });
                 };
                 UserListComponent.prototype.hasData = function () {
                     return this.dataSource !== null;
+                };
+                UserListComponent.prototype.showButtons = function () {
+                    return this.selecteduser != null;
+                };
+                UserListComponent.prototype.selectRow = function (user) {
+                    this.selecteduser = user;
+                    this.selectedfullName = user.fullName;
+                    if (user.roles[1] == "ADMIN") {
+                        this.admin = true;
+                    }
+                    else {
+                        this.admin = false;
+                    }
+                };
+                UserListComponent.prototype.makeAdmin = function () {
+                    this.selecteduser.roles = ["GUEST", "ADMIN"];
+                    this.update();
+                };
+                UserListComponent.prototype.unAdmin = function () {
+                    this.selecteduser.roles = ["GUEST"];
+                    this.update();
+                };
+                UserListComponent.prototype.update = function () {
+                    this.userService.update(this.selecteduser.fullName, this.selecteduser);
+                    this.selecteduser = null;
+                    this.getUsersList();
+                    this.getUsersList();
+                    this.getUsersList();
                 };
                 UserListComponent = __decorate([
                     core_1.Component({

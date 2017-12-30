@@ -48,6 +48,15 @@ public class UserResource
     }
     
     @GET
+    @JsonView(View.Private.class)
+    @RolesAllowed("ADMIN")
+    @Path("/admin")
+    public Collection<User> retrieveAllAdmin(@Auth User user)
+    {
+        return service.getAll(user);
+    }
+    
+    @GET
     @Path("/{fullname}")
     @JsonView(View.Public.class)
     @RolesAllowed("GUEST")

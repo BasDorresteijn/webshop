@@ -36,6 +36,7 @@ System.register(["@angular/core", "./list.datasource", "../cart.service"], funct
                     var _this = this;
                     this.cartService.getCart().subscribe(function (data) {
                         _this.cart = data;
+                        console.log(_this.cart);
                         _this.dataSource = new list_datasource_1.ListDataSource(_this.cart.products);
                         _this.getPrice();
                     });

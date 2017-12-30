@@ -22,6 +22,11 @@ export class UserService
     {
         return this.api.get<User[]>('users');
     }
+
+    public getAllAdmin(): Observable<User[]>
+    {
+        return this.api.get<User[]>('users/admin');
+    }
     
     public register(user: User): void
     {
@@ -76,5 +81,34 @@ export class UserService
     private goHome()
     {
         this.router.navigate(['']);
+    }
+
+    public getAuth() {
+        return this.authService.getAuthenticator()
+    }
+
+    public update(fullName : String, user : User) {
+
+        let data =
+        {
+            fullName: user.fullName,
+            postcode: user.postcode,
+            streetnumber: user.streetnumber,
+            emailAddress: user.emailAddress,
+            password: user.password,
+            roles: user.roles
+        };
+        
+        this.api.put<void>('users/' + fullName, data).subscribe
+        (
+            data =>
+            {
+                
+            },
+            error =>
+            {
+                alert('Het updaten is mislukt');
+            }
+        );
     }
 }

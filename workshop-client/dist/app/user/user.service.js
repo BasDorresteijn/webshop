@@ -36,6 +36,9 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                 UserService.prototype.getAll = function () {
                     return this.api.get('users');
                 };
+                UserService.prototype.getAllAdmin = function () {
+                    return this.api.get('users/admin');
+                };
                 UserService.prototype.register = function (user) {
                     var _this = this;
                     var data = {
@@ -67,6 +70,23 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                 };
                 UserService.prototype.goHome = function () {
                     this.router.navigate(['']);
+                };
+                UserService.prototype.getAuth = function () {
+                    return this.authService.getAuthenticator();
+                };
+                UserService.prototype.update = function (fullName, user) {
+                    var data = {
+                        fullName: user.fullName,
+                        postcode: user.postcode,
+                        streetnumber: user.streetnumber,
+                        emailAddress: user.emailAddress,
+                        password: user.password,
+                        roles: user.roles
+                    };
+                    this.api.put('users/' + fullName, data).subscribe(function (data) {
+                    }, function (error) {
+                        alert('Het updaten is mislukt');
+                    });
                 };
                 UserService = __decorate([
                     core_1.Injectable(),

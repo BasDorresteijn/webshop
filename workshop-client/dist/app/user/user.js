@@ -5,13 +5,14 @@ System.register([], function (exports_1, context_1) {
     return {
         setters: [],
         execute: function () {
-            User = (function () {
-                function User(fullName, postcode, streetnumber, emailAddress, password) {
+            User = /** @class */ (function () {
+                function User(fullName, postcode, streetnumber, emailAddress, password, roles) {
                     this.fullName = fullName;
                     this.postcode = postcode;
                     this.streetnumber = streetnumber;
                     this.emailAddress = emailAddress;
                     this.password = password;
+                    this.roles = roles;
                 }
                 return User;
             }());

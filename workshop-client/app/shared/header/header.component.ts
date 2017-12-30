@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthorizationService } from '../authorization.service';
+import { User } from '../../user/user';
 
 @Component({
     selector: 'app-header',
@@ -13,6 +14,7 @@ import { AuthorizationService } from '../authorization.service';
 export class HeaderComponent
 {
     public authenticated: boolean = false;
+    public user?: User;
 
     constructor(private authService: AuthorizationService, private router: Router)
     {
@@ -24,6 +26,7 @@ export class HeaderComponent
                 this.authenticated = authorized;
             }
         );
+
     }
     
     public goHome()
@@ -39,7 +42,6 @@ export class HeaderComponent
     public logout()
     {
         this.authService.deleteAuthorization();
-        
         this.goHome();
     }
 
@@ -53,5 +55,18 @@ export class HeaderComponent
 
     public goCart() {
         this.router.navigate(['cart'])
+    }
+
+    public isadmin() {
+        this.user = this.authService.getAuthenticator()
+        if(this.user == null) {
+            return false;
+        }
+        if(this.user.roles[1] == "ADMIN") {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
