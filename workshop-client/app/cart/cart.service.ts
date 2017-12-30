@@ -10,6 +10,7 @@ import { Cart } from './cart';
 import { User } from '../user/user';
 import { Product } from '../product/product';
 import { error } from 'util';
+import { isPromise } from '@angular/core/src/util/lang';
 
 @Injectable()
 export class CartService
@@ -17,7 +18,7 @@ export class CartService
     private user?: User;
     private totalPrice: Number;
 
-    constructor(private api: ApiService, private autorizationService: AuthorizationService) {
+    constructor(private api: ApiService, private autorizationService: AuthorizationService, private router: Router) {
         this.user = this.autorizationService.getAuthenticator()
     }
 
@@ -57,5 +58,21 @@ export class CartService
 
     public getTotalPrice() {
         return this.api.get<number>("carts/price");
+    }
+
+    public emptycart() {
+        this.api.delete<void>("carts/remove").subscribe(
+            data => {
+                
+            }
+        );
+    }
+
+    public paycart() {
+        this.api.delete<void>("carts/buy").subscribe()
+    }
+
+    public goHome() {
+        this.router.navigate([''])
     }
 }

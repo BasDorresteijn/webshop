@@ -36,7 +36,6 @@ System.register(["@angular/core", "./list.datasource", "../cart.service"], funct
                     var _this = this;
                     this.cartService.getCart().subscribe(function (data) {
                         _this.cart = data;
-                        console.log(_this.cart);
                         _this.dataSource = new list_datasource_1.ListDataSource(_this.cart.products);
                         _this.getPrice();
                     });
@@ -55,6 +54,15 @@ System.register(["@angular/core", "./list.datasource", "../cart.service"], funct
                     this.cartService.unbuyProduct(product);
                     this.getProductList();
                     this.getProductList();
+                };
+                CartListComponent.prototype.emptycart = function () {
+                    this.cartService.goHome();
+                    this.cartService.emptycart();
+                };
+                CartListComponent.prototype.paycart = function () {
+                    this.cartService.goHome();
+                    alert("Dat is dan: €" + this.totalPrice);
+                    this.cartService.paycart();
                 };
                 CartListComponent = __decorate([
                     core_1.Component({

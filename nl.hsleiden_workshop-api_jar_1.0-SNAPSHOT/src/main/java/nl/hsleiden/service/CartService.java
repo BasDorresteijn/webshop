@@ -46,4 +46,8 @@ public class CartService {
         return cartDAO.getTotalPrice(user);
     }
     
+    public void removeCart(User user, boolean buy) {
+        cartDAO.removeCart(user.getFullName(), buy);
+    }
+    
 }

@@ -108,12 +108,62 @@ public class CartDAO {
     }
     
     public void updateCart(String fullname, Cart cart) {
-        removeCart(fullname);
+        removeCart(fullname, false);
         addCart(cart);
     }
     
-    public void removeCart(String fullname) {
+    private ArrayList<String> getProductsInCart(String fullname) {
         try {
+            PreparedStatement getProducts = conn.prepareStatement("SELECT DISTINCT product_productname FROM cart WHERE user_fullname = ?");
+            getProducts.setString(1, fullname);
+            ResultSet rs = getProducts.executeQuery();
+            ArrayList<String> products = new ArrayList<>();
+            while(rs.next()) {
+                products.add(rs.getString(1));
+            }
+            return products;
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    private void addAvailable(String fullname, String product) {
+        try {
+            PreparedStatement addAvailable = conn.prepareStatement("SELECT COUNT(product_productname) FROM cart WHERE user_fullname = ? AND product_productname = ?");
+            addAvailable.setString(1, fullname);
+            addAvailable.setString(2, product);
+            ResultSet rs = addAvailable.executeQuery();
+            rs.next();
+            productDAO.setAvailable(product, rs.getInt(1));
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void addSoldAmount(String fullname, String product) {
+        try {
+            PreparedStatement addAvailable = conn.prepareStatement("SELECT COUNT(product_productname) FROM cart WHERE user_fullname = ? AND product_productname = ?");
+            addAvailable.setString(1, fullname);
+            addAvailable.setString(2, product);
+            ResultSet rs = addAvailable.executeQuery();
+            rs.next();
+            productDAO.setSoldAmount(product, rs.getInt(1));
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public void removeCart(String fullname, boolean buy) {
+        try {
+            for(String productnaam : getProductsInCart(fullname)) {
+                if(buy) {
+                    addSoldAmount(fullname, productnaam);
+                } else {
+                    addAvailable(fullname, productnaam);
+                }
+            }
             PreparedStatement removeCart = conn.prepareStatement("DELETE from cart where user_fullname = ?");
             removeCart.setString(1, fullname);
             removeCart.execute();

@@ -69,8 +69,22 @@ public class CartResource {
     }
     
     @DELETE
+    @RolesAllowed("GUEST")
     public void removeProduct(@QueryParam("productName") String productName, @Auth User user){
         cartService.removeProduct(productName, user);
     }
     
+    @DELETE 
+    @RolesAllowed("GUEST")
+    @Path("/remove")
+    public void deleteCart(@Auth User user) {
+        cartService.removeCart(user, false);
+    }
+    
+    @DELETE 
+    @RolesAllowed("GUEST")
+    @Path("/buy")
+    public void buyCart(@Auth User user) {
+        cartService.removeCart(user, true);
+    }
 }

@@ -28,7 +28,6 @@ export class CartListComponent
         this.cartService.getCart().subscribe(
             data => {
                 this.cart = <Cart> data;
-                console.log(this.cart)
                 this.dataSource = new ListDataSource(this.cart.products);
                 this.getPrice();
             }
@@ -55,5 +54,16 @@ export class CartListComponent
         this.cartService.unbuyProduct(product)
         this.getProductList()
         this.getProductList()
+    }
+
+    public emptycart() {
+        this.cartService.goHome();
+        this.cartService.emptycart();
+    }
+
+    public paycart() {
+        this.cartService.goHome();
+        alert("Dat is dan: €" + this.totalPrice);
+        this.cartService.paycart();
     }
 }

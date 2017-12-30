@@ -105,12 +105,34 @@ public class ProductDAO {
         }
     }
     
-        public void buy(String productname, Product product) {
+    public void buy(String productname, Product product) {
         try {
             PreparedStatement updateProduct = conn.prepareStatement("update product set available = ? WHERE productname = ?");
             updateProduct.setInt(1, product.getAvailable());         
             updateProduct.setString(2, productname);
             updateProduct.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setAvailable(String productname, int add) {
+        try {
+            PreparedStatement setAvailable = conn.prepareStatement("UPDATE product SET available = available + ? WHERE productname=?");
+            setAvailable.setString(2, productname);
+            setAvailable.setInt(1, add);
+            setAvailable.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setSoldAmount(String productname, int soldAmount) {
+        try {
+            PreparedStatement setAvailable = conn.prepareStatement("UPDATE product SET soldAmount = soldAmount + ? WHERE productname=?");
+            setAvailable.setString(2, productname);
+            setAvailable.setInt(1, soldAmount);
+            setAvailable.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

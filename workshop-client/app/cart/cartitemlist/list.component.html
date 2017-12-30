@@ -28,5 +28,9 @@
 
     </mat-table>
 </div>
-<h3>Prijs: €{{totalPrice}}</h3>
+    <h3 id="floatright">Prijs: €{{totalPrice}}</h3>
+    <div id="floatleft">
+        <button mat-raised-button class="mat-primary" (click)="paycart()">Betalen</button>
+        <button mat-raised-button class="mat-warn" (click)="emptycart()">Winkelwagen leegmaken</button>
+    </div>
 </div>

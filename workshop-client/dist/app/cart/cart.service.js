@@ -1,4 +1,4 @@
-System.register(["@angular/core", "../shared/api.service", "../shared/authorization.service"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", "../shared/api.service", "../shared/authorization.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,11 +10,14 @@ System.register(["@angular/core", "../shared/api.service", "../shared/authorizat
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, api_service_1, authorization_service_1, CartService;
+    var core_1, router_1, api_service_1, authorization_service_1, CartService;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             },
             function (api_service_1_1) {
                 api_service_1 = api_service_1_1;
@@ -25,9 +28,10 @@ System.register(["@angular/core", "../shared/api.service", "../shared/authorizat
         ],
         execute: function () {
             CartService = /** @class */ (function () {
-                function CartService(api, autorizationService) {
+                function CartService(api, autorizationService, router) {
                     this.api = api;
                     this.autorizationService = autorizationService;
+                    this.router = router;
                     this.user = this.autorizationService.getAuthenticator();
                 }
                 CartService.prototype.getCart = function () {
@@ -54,9 +58,19 @@ System.register(["@angular/core", "../shared/api.service", "../shared/authorizat
                 CartService.prototype.getTotalPrice = function () {
                     return this.api.get("carts/price");
                 };
+                CartService.prototype.emptycart = function () {
+                    this.api.delete("carts/remove").subscribe(function (data) {
+                    });
+                };
+                CartService.prototype.paycart = function () {
+                    this.api.delete("carts/buy").subscribe();
+                };
+                CartService.prototype.goHome = function () {
+                    this.router.navigate(['']);
+                };
                 CartService = __decorate([
                     core_1.Injectable(),
-                    __metadata("design:paramtypes", [api_service_1.ApiService, authorization_service_1.AuthorizationService])
+                    __metadata("design:paramtypes", [api_service_1.ApiService, authorization_service_1.AuthorizationService, router_1.Router])
                 ], CartService);
                 return CartService;
             }());
