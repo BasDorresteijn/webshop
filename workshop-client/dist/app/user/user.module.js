@@ -1,4 +1,4 @@
-System.register(["@angular/core", "../public.module", "../shared/shared.module", "./user.service", "./register/register.component", "./login/login.component", "./list/list.component"], function (exports_1, context_1) {
+System.register(["@angular/core", "../public.module", "../shared/shared.module", "./user.service", "./register/register.component", "./login/login.component", "./list/list.component", "./edit/edituser.component", "@angular/forms"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "../public.module", "../shared/shared.module",
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, public_module_1, shared_module_1, user_service_1, register_component_1, login_component_1, list_component_1, UserModule;
+    var core_1, public_module_1, shared_module_1, user_service_1, register_component_1, login_component_1, list_component_1, edituser_component_1, forms_1, UserModule;
     return {
         setters: [
             function (core_1_1) {
@@ -30,6 +30,12 @@ System.register(["@angular/core", "../public.module", "../shared/shared.module",
             },
             function (list_component_1_1) {
                 list_component_1 = list_component_1_1;
+            },
+            function (edituser_component_1_1) {
+                edituser_component_1 = edituser_component_1_1;
+            },
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
             }
         ],
         execute: function () {
@@ -38,9 +44,9 @@ System.register(["@angular/core", "../public.module", "../shared/shared.module",
                 }
                 UserModule = __decorate([
                     core_1.NgModule({
-                        imports: [public_module_1.PublicModule, shared_module_1.SharedModule,],
-                        exports: [login_component_1.LoginComponent],
-                        declarations: [register_component_1.RegisterComponent, login_component_1.LoginComponent, list_component_1.UserListComponent],
+                        imports: [public_module_1.PublicModule, shared_module_1.SharedModule, forms_1.FormsModule, forms_1.ReactiveFormsModule],
+                        exports: [login_component_1.LoginComponent, edituser_component_1.EditUserComponent],
+                        declarations: [register_component_1.RegisterComponent, login_component_1.LoginComponent, list_component_1.UserListComponent, edituser_component_1.EditUserComponent],
                         providers: [user_service_1.UserService]
                     })
                 ], UserModule);

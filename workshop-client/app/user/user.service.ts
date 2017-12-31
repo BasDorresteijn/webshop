@@ -111,4 +111,22 @@ export class UserService
             }
         );
     }
+
+    public putUser(user : User) {
+
+        let data = 
+        {
+            fullName: user.fullName,
+            postcode: user.postcode,
+            streetnumber: user.streetnumber,
+            emailAddress: user.emailAddress,
+            password: user.password
+        }
+
+        this.api.put<void>("users/me", data).subscribe( 
+            data => {
+                this.login(user, false)
+            }
+        );
+    }
 }

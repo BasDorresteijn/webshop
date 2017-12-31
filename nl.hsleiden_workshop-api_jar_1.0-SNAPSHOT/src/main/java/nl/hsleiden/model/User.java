@@ -23,12 +23,12 @@ public class User implements Principal
     
     @NotEmpty
     @Length(min = 6, max = 7)
-    @JsonView(View.Public.class)
+    @JsonView(View.Private.class)
     private String postcode;
     
     @NotEmpty
     @Length(min = 1, max = 10)
-    @JsonView(View.Public.class)
+    @JsonView(View.Private.class)
     private String streetnumber;
     
     @NotEmpty
@@ -37,11 +37,11 @@ public class User implements Principal
     private String emailAddress;
     
     @NotEmpty
-    @Length(min = 8)
-    @JsonView(View.Protected.class)
+    @Length(min = 3)
+    @JsonView(View.Private.class)
     private String password;
     
-    @JsonView(View.Private.class)
+    @JsonView(View.Protected.class)
     private String[] roles;
 
     public String getFullName()

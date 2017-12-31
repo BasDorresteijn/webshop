@@ -66,11 +66,25 @@ public class UserService extends BaseService<User>
         dao.update(fullname, user);
     }
     
+    public void updateroles(User user, String fullname){
+        boolean admin = false;
+        for(String role : user.getRoles()) {
+            if(role.equals("ADMIN")) {
+                admin = true;
+            }
+        }
+        dao.updateRoles(fullname, admin);
+    }
+    
     public void delete(String fullname)
     {
         // Controleren of deze gebruiker wel bestaat
         User user = get(fullname);
         
         dao.delete(fullname);
+    }
+    
+    public void update(User user, String username) {
+        dao.update(username, user);
     }
 }

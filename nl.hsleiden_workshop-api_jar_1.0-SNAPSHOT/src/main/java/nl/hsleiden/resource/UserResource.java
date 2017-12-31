@@ -77,10 +77,10 @@ public class UserResource
     @Path("/{fullname}")
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonView(View.Protected.class)
-    @RolesAllowed("GUEST")
-    public void update(@PathParam("fullname") String fullname, @Auth User authenticator, User user)
+    @RolesAllowed("ADMIN")
+    public void update(@PathParam("fullname") String fullname, User user)
     {
-        service.update(authenticator, fullname, user);
+        service.updateroles(user, fullname);
     }
     
     @DELETE
@@ -97,5 +97,11 @@ public class UserResource
     public User authenticate(@Auth User authenticator)
     {
         return authenticator;
+    }
+    
+    @PUT
+    @Path("/me")
+    public void updateMe(@Auth User authenticator, @Valid User user) {
+        service.update(user, authenticator.getName());
     }
 }

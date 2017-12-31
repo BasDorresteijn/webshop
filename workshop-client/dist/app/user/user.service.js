@@ -88,6 +88,19 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                         alert('Het updaten is mislukt');
                     });
                 };
+                UserService.prototype.putUser = function (user) {
+                    var _this = this;
+                    var data = {
+                        fullName: user.fullName,
+                        postcode: user.postcode,
+                        streetnumber: user.streetnumber,
+                        emailAddress: user.emailAddress,
+                        password: user.password
+                    };
+                    this.api.put("users/me", data).subscribe(function (data) {
+                        _this.login(user, false);
+                    });
+                };
                 UserService = __decorate([
                     core_1.Injectable(),
                     __metadata("design:paramtypes", [api_service_1.ApiService,

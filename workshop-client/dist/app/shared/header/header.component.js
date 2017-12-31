@@ -54,6 +54,9 @@ System.register(["@angular/core", "@angular/router", "../authorization.service"]
                 HeaderComponent.prototype.goCart = function () {
                     this.router.navigate(['cart']);
                 };
+                HeaderComponent.prototype.goMe = function () {
+                    this.router.navigate(['me']);
+                };
                 HeaderComponent.prototype.isadmin = function () {
                     this.user = this.authService.getAuthenticator();
                     if (this.user == null) {

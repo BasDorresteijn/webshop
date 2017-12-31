@@ -10,6 +10,7 @@ import { ProductListComponent } from './product/productlist/list.component'
 import { CartComponent } from './cart/showcart/cart.component';
 import { AddProductComponent } from './product/addproduct/addproduct.component';
 import { EditProductComponent } from './product/editproduct/editproduct.component';
+import { EditUserComponent } from './user/edit/edituser.component';
 
 export const routes: Routes =
 [
@@ -20,7 +21,8 @@ export const routes: Routes =
     { path: 'products', component: ProductListComponent},
     { path: 'products/add', component: AddProductComponent},
     { path: 'products/edit', component: EditProductComponent},
-    { path: 'cart', component: CartComponent}
+    { path: 'cart', component: CartComponent},
+    { path: 'me', component: EditUserComponent }
 ];
 
 @NgModule({

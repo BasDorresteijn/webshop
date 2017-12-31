@@ -127,23 +127,27 @@ public class UserDAO
     
     public void update(String fullName, User user) {
         try {
-            boolean admin = false;
             PreparedStatement updateUser = conn.prepareStatement("update webshop_user set fullname = ?,"
                     + " postcode = ?, streetnumber = ?, email = ?,"
-                    + " password = ?, adminrole = ? where fullname = ? ");
+                    + " password = ? where fullname = ? ");
             updateUser.setString(1, user.getFullName());
             updateUser.setString(2, user.getPostcode());
             updateUser.setString(3, user.getStreetnumber());
             updateUser.setString(4, user.getEmailAddress());
             updateUser.setString(5, user.getPassword());
-            for(int i = 0; i < user.getRoles().length; i++) {
-                if(user.getRoles()[i].equals("ADMIN")) {
-                    admin = true;
-                }
-            }
-            updateUser.setBoolean(6, admin);
-            updateUser.setString(7, fullName);
-            updateUser.execute();
+            updateUser.setString(6, fullName);
+            updateUser.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateRoles(String fullName, boolean admin) {
+        try {
+            PreparedStatement updateRoles = conn.prepareStatement("update webshop_user set adminrole = ? where fullname = ? ");
+            updateRoles.setBoolean(1, admin);
+            updateRoles.setString(2, fullName);
+            updateRoles.execute();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

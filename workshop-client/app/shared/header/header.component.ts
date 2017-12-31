@@ -57,6 +57,10 @@ export class HeaderComponent
         this.router.navigate(['cart'])
     }
 
+    public goMe() {
+        this.router.navigate(['me'])
+    }
+
     public isadmin() {
         this.user = this.authService.getAuthenticator()
         if(this.user == null) {

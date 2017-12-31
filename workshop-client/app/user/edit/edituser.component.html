@@ -1,0 +1,51 @@
+<mat-card>
+
+    <mat-card-header>
+        <mat-card-title>
+            <h1>Aanpassen product</h1>
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <form name="editUserForm" #registerForm="ngForm" [formGroup]="editUserForm" (ngSubmit)="editUser()">
+
+            <mat-form-field class="full-width">
+                <input matInput type="text" name="fullName" placeholder="Gebruikersnaam" required [(ngModel)]="user.fullName" formControlName="fullName" #fullName/>
+                <mat-error [hidden]="fullName.valid">
+                    Dit veld is verplicht
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput type="text" name="postcode" placeholder="Postcode" required [(ngModel)]="user.postcode" formControlName="postcode" #postcode/>
+                <mat-error [hidden]="postcode.valid">
+                    Dit veld is verplicht
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput type="text" name="streetnumber" placeholder="Straatnummer" required [(ngModel)]="user.streetnumber" formControlName="streetnumber" #streetnumber/>
+                <mat-error [hidden]="streetnumber.valid">
+                    Dit veld is verplicht
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput type="text" name="emailAddress" placeholder="Email adres" required [(ngModel)]="user.emailAddress" formControlName="emailAddress" #emailAddress/>
+                <mat-error [hidden]="emailAddress.valid">
+                    Dit veld is verplicht
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button type="submit" class="mat-primary" [disabled]="!editUserForm.valid">Updaten</button>
+            <button mat-raised-button class="mat-warn" routerLink="" >Annuleren</button>
+        </form>
+
+    </mat-card-content>
+
+    <mat-card-actions> 
+
+    </mat-card-actions>
+
+</mat-card>
