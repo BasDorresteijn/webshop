@@ -22,6 +22,10 @@ export class ProductListComponent
     {
         this.getProductList();
     }
+
+    ngOnInit() {
+        // this.productService.getUpdateViews().subscribe( () => this.getProductList())
+    }
     
     private getProductList()
     {
@@ -49,8 +53,6 @@ export class ProductListComponent
 
     private deleteProduct() {
         this.productService.removeProduct(this.selectedproduct)
-        this.getProductList()
-        this.getProductList()
     }
 
     private showButtons() {

@@ -31,6 +31,9 @@ System.register(["@angular/core", "./list.datasource", "../product.service"], fu
                     this.dataSource = null;
                     this.getProductList();
                 }
+                ProductListComponent.prototype.ngOnInit = function () {
+                    // this.productService.getUpdateViews().subscribe( () => this.getProductList())
+                };
                 ProductListComponent.prototype.getProductList = function () {
                     var _this = this;
                     this.productService.getAllAdmin().subscribe(function (producten) {
@@ -49,8 +52,6 @@ System.register(["@angular/core", "./list.datasource", "../product.service"], fu
                 };
                 ProductListComponent.prototype.deleteProduct = function () {
                     this.productService.removeProduct(this.selectedproduct);
-                    this.getProductList();
-                    this.getProductList();
                 };
                 ProductListComponent.prototype.showButtons = function () {
                     return this.selectedproduct != null;

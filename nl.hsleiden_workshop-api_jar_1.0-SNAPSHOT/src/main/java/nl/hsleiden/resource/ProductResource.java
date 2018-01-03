@@ -73,7 +73,7 @@ public class ProductResource {
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed("ADMIN")
+    @RolesAllowed("GUEST")
     public void updateProduct(@Valid Product product, @QueryParam("productname") String productName) {
         productService.updateProduct(productName, product);
     }

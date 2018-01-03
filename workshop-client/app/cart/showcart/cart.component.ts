@@ -21,6 +21,10 @@ export class CartComponent
     constructor(private cartService: CartService) {
         this.getCart()
     }
+
+    ngOnInit() {
+        this.cartService.getUpdateViews().subscribe( () => this.getCart())
+    }
     
     public getCart() {
         this.cartService.getCart().subscribe(

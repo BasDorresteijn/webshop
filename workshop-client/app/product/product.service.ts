@@ -6,26 +6,35 @@ import { Observable } from 'rxjs/Observable';
 import { ApiService } from '../shared/api.service';
 import { AuthorizationService } from '../shared/authorization.service';
 import { Product } from './product';
+import { EventEmitter } from '@angular/core';
 
 
 @Injectable()
 export class ProductService
 {
     private selectedProduct?: Product;
+    // private updateViews: EventEmitter<null>;
 
     constructor(private api: ApiService,
         private authService: AuthorizationService,
         private router: Router)
     {        
+        // this.updateViews = new EventEmitter();
+    }
+
+    public getUpdateViews() {
+        // return this.updateViews;
     }
 
     public getAll(): Observable<Product[]>
     {
+        // this.updateViews.emit();
         return this.api.get<Product[]>('products');
     }
 
     public getAllAdmin(): Observable<Product[]>
     {
+        // this.updateViews.emit();
         return this.api.get<Product[]>('products/admin');
     }
     
@@ -57,7 +66,7 @@ export class ProductService
             data => {
                 product.available = product.available-1
                 this.api.post<void>("carts/addProduct", null  ,"?productName=" + product.productName).subscribe( data => {
-                    
+                    // this.updateViews.emit();
                 },
                 error => {
                     alert("Er is iets fout gegaan")
@@ -70,7 +79,6 @@ export class ProductService
     }
 
     public create(product : Product) {
-
         let data = {
             productName: product.productName,
             price: product.price.toFixed(2),
@@ -81,6 +89,7 @@ export class ProductService
         this.api.post<void>("products", data).subscribe(
             data => {
                 this.router.navigate(["/products"])
+                // this.updateViews.emit();
             },
             error => {
                 alert("Er is iets fout gegaan.")
@@ -98,6 +107,7 @@ export class ProductService
 
         this.api.put<void>("products", data, "?productname=" + productname).subscribe(
             data => {
+                // this.updateViews.emit();
                 this.router.navigate(["/products"])
             },
             error => {
@@ -107,6 +117,7 @@ export class ProductService
     }
 
     public removeProduct(product : Product) {
+        // this.updateViews.emit();
         this.api.delete<void>("products/" + product.productName).subscribe(
 
         )

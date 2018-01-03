@@ -7,15 +7,23 @@ import { ApiService } from '../shared/api.service';
 import { AuthorizationService } from '../shared/authorization.service';
 
 import { User } from './user';
+import { EventEmitter } from '@angular/core';
 
 @Injectable()
 export class UserService
 {
+
+    private updateViews: EventEmitter<null>;
+
     constructor(private api: ApiService,
         private authService: AuthorizationService,
         private router: Router)
     {
-        
+        this.updateViews = new EventEmitter();
+    }
+
+    public getUpdateViews() {
+        return this.updateViews;
     }
     
     public getAll(): Observable<User[]>
@@ -54,7 +62,7 @@ export class UserService
     
     public login(user: User, remember: boolean): void
     {
-        this.authService.setAuthorization(user.emailAddress, user.password);
+        this.authService.setAuthorization(user.fullName, user.password);
         
         this.api.get<User>('users/me').subscribe
         (
@@ -103,7 +111,7 @@ export class UserService
         (
             data =>
             {
-                
+                this.updateViews.emit();
             },
             error =>
             {

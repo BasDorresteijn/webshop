@@ -28,15 +28,22 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
         ],
         execute: function () {
             ProductService = /** @class */ (function () {
+                // private updateViews: EventEmitter<null>;
                 function ProductService(api, authService, router) {
                     this.api = api;
                     this.authService = authService;
                     this.router = router;
+                    // this.updateViews = new EventEmitter();
                 }
+                ProductService.prototype.getUpdateViews = function () {
+                    // return this.updateViews;
+                };
                 ProductService.prototype.getAll = function () {
+                    // this.updateViews.emit();
                     return this.api.get('products');
                 };
                 ProductService.prototype.getAllAdmin = function () {
+                    // this.updateViews.emit();
                     return this.api.get('products/admin');
                 };
                 ProductService.prototype.getProduct = function (productnaam) {
@@ -63,6 +70,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     this.api.put("products/buy", data, "?productname=" + product.productName).subscribe(function (data) {
                         product.available = product.available - 1;
                         _this.api.post("carts/addProduct", null, "?productName=" + product.productName).subscribe(function (data) {
+                            // this.updateViews.emit();
                         }, function (error) {
                             alert("Er is iets fout gegaan");
                         });
@@ -80,6 +88,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     };
                     this.api.post("products", data).subscribe(function (data) {
                         _this.router.navigate(["/products"]);
+                        // this.updateViews.emit();
                     }, function (error) {
                         alert("Er is iets fout gegaan.");
                     });
@@ -93,12 +102,14 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                         available: product.available
                     };
                     this.api.put("products", data, "?productname=" + productname).subscribe(function (data) {
+                        // this.updateViews.emit();
                         _this.router.navigate(["/products"]);
                     }, function (error) {
                         alert("Er is iets fout gegaan.");
                     });
                 };
                 ProductService.prototype.removeProduct = function (product) {
+                    // this.updateViews.emit();
                     this.api.delete("products/" + product.productName).subscribe();
                 };
                 ProductService = __decorate([

@@ -104,6 +104,31 @@ public class UserDAO
         return null;
     }
     
+    public User getByFullname(String fullname) {
+        try {
+            User user = new User();;
+            PreparedStatement getUser = conn.prepareStatement("select * from webshop_user where fullname = ? ");
+            getUser.setString(1, fullname);
+            ResultSet rs = getUser.executeQuery();
+            while(rs.next()) {
+                user.setFullName(rs.getString(1));
+                user.setPostcode(rs.getString(2));
+                user.setStreetnumber(rs.getString(3));
+                user.setEmailAddress(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                if(rs.getBoolean(6)) {
+                    user.setRoles(new String[] { "GUEST", "ADMIN" });
+                } else {
+                    user.setRoles(new String[] { "GUEST" });
+                }
+            }
+            return user;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public void add(User user) {
         try {
             boolean admin = false;

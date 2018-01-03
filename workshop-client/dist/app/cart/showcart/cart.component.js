@@ -26,6 +26,10 @@ System.register(["@angular/core", "../cart.service"], function (exports_1, conte
                     this.cartService = cartService;
                     this.getCart();
                 }
+                CartComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.cartService.getUpdateViews().subscribe(function () { return _this.getCart(); });
+                };
                 CartComponent.prototype.getCart = function () {
                     var _this = this;
                     this.cartService.getCart().subscribe(function (data) {

@@ -22,7 +22,7 @@ export class ProductComponent
     }
 
     ngOnInit() {
-        
+        // this.service.getUpdateViews().subscribe( () => this.getProducten())
     }
 
     public getProducten() {

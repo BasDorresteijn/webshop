@@ -22,6 +22,10 @@ export class CartListComponent
     {
         this.getProductList();
     }
+
+    ngOnInit() {
+        this.cartService.getUpdateViews().subscribe(() => this.getProductList())
+    }
     
     private getProductList()
     {
@@ -52,8 +56,6 @@ export class CartListComponent
     public removeItem(product : Product) {
         this.cartService.removeProductFromCart(product)
         this.cartService.unbuyProduct(product)
-        this.getProductList()
-        this.getProductList()
     }
 
     public emptycart() {

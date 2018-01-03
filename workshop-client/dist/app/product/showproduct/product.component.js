@@ -27,6 +27,7 @@ System.register(["@angular/core", "../product.service"], function (exports_1, co
                     this.getProducten();
                 }
                 ProductComponent.prototype.ngOnInit = function () {
+                    // this.service.getUpdateViews().subscribe( () => this.getProducten())
                 };
                 ProductComponent.prototype.getProducten = function () {
                     var _this = this;

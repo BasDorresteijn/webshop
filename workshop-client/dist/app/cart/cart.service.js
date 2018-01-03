@@ -10,11 +10,12 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, api_service_1, authorization_service_1, CartService;
+    var core_1, router_1, api_service_1, authorization_service_1, core_2, CartService;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
+                core_2 = core_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
@@ -33,24 +34,29 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     this.autorizationService = autorizationService;
                     this.router = router;
                     this.user = this.autorizationService.getAuthenticator();
+                    this.updateViews = new core_2.EventEmitter();
                 }
                 CartService.prototype.getCart = function () {
                     this.user = this.autorizationService.getAuthenticator();
                     return this.api.get('carts/' + this.user.fullName);
                 };
                 CartService.prototype.removeProductFromCart = function (product) {
+                    var _this = this;
                     this.api.delete("carts", "?productName=" + product.productName).subscribe(function (data) {
+                        _this.updateViews.emit();
                     }, function (error) {
                     });
                 };
                 CartService.prototype.unbuyProduct = function (product) {
+                    var _this = this;
                     var data = {
                         productName: product.productName,
                         price: product.price,
                         description: product.description,
                         available: (product.available + 1)
                     };
-                    this.api.put("products", data).subscribe(function (data) {
+                    this.api.put("products", data, "?productname=" + product.productName).subscribe(function (data) {
+                        _this.updateViews.emit();
                     }, function (error) {
                         alert("Je moet ingelogd zijn om een product te kopen");
                     });
@@ -59,14 +65,22 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     return this.api.get("carts/price");
                 };
                 CartService.prototype.emptycart = function () {
+                    var _this = this;
                     this.api.delete("carts/remove").subscribe(function (data) {
+                        _this.updateViews.emit();
                     });
                 };
                 CartService.prototype.paycart = function () {
-                    this.api.delete("carts/buy").subscribe();
+                    var _this = this;
+                    this.api.delete("carts/buy").subscribe(function (data) {
+                        _this.updateViews.emit();
+                    });
                 };
                 CartService.prototype.goHome = function () {
                     this.router.navigate(['']);
+                };
+                CartService.prototype.getUpdateViews = function () {
+                    return this.updateViews;
                 };
                 CartService = __decorate([
                     core_1.Injectable(),

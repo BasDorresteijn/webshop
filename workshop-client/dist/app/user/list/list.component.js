@@ -32,6 +32,10 @@ System.register(["@angular/core", "./list.datasource", "../user.service"], funct
                     this.admin = false;
                     this.getUsersList();
                 }
+                UserListComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.userService.getUpdateViews().subscribe(function () { return _this.getUsersList(); });
+                };
                 UserListComponent.prototype.getUsersList = function () {
                     var _this = this;
                     this.userService.getAllAdmin().subscribe(function (users) {

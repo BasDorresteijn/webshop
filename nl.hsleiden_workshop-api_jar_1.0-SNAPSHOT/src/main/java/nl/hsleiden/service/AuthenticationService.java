@@ -33,7 +33,7 @@ public class AuthenticationService implements Authenticator<BasicCredentials, Us
     @Override
     public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException
     {
-        User user = userDAO.getByEmailAddress(credentials.getUsername());
+        User user = userDAO.getByFullname(credentials.getUsername());
         
         if (user != null && user.getPassword().equals(credentials.getPassword()))
         {

@@ -32,6 +32,10 @@ System.register(["@angular/core", "./list.datasource", "../cart.service"], funct
                     this.totalPrice = 0;
                     this.getProductList();
                 }
+                CartListComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.cartService.getUpdateViews().subscribe(function () { return _this.getProductList(); });
+                };
                 CartListComponent.prototype.getProductList = function () {
                     var _this = this;
                     this.cartService.getCart().subscribe(function (data) {
@@ -52,8 +56,6 @@ System.register(["@angular/core", "./list.datasource", "../cart.service"], funct
                 CartListComponent.prototype.removeItem = function (product) {
                     this.cartService.removeProductFromCart(product);
                     this.cartService.unbuyProduct(product);
-                    this.getProductList();
-                    this.getProductList();
                 };
                 CartListComponent.prototype.emptycart = function () {
                     this.cartService.goHome();

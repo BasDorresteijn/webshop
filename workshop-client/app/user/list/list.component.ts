@@ -24,6 +24,9 @@ export class UserListComponent
         this.getUsersList();
     }
     
+    ngOnInit() {
+        this.userService.getUpdateViews().subscribe(() => this.getUsersList())
+    }
 
     private getUsersList()
     {

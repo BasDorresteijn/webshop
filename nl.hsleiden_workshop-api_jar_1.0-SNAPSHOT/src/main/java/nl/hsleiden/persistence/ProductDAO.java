@@ -99,6 +99,7 @@ public class ProductDAO {
             updateProduct.setInt(5, product.getSoldAmount());            
             updateProduct.setString(6, productname);
             System.out.println("wowowowow");
+            System.out.println(product.getAvailable());
             updateProduct.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);

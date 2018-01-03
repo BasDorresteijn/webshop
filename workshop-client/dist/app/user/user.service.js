@@ -10,11 +10,12 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, api_service_1, authorization_service_1, UserService;
+    var core_1, router_1, api_service_1, authorization_service_1, core_2, UserService;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
+                core_2 = core_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
@@ -32,7 +33,11 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     this.api = api;
                     this.authService = authService;
                     this.router = router;
+                    this.updateViews = new core_2.EventEmitter();
                 }
+                UserService.prototype.getUpdateViews = function () {
+                    return this.updateViews;
+                };
                 UserService.prototype.getAll = function () {
                     return this.api.get('users');
                 };
@@ -56,7 +61,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                 };
                 UserService.prototype.login = function (user, remember) {
                     var _this = this;
-                    this.authService.setAuthorization(user.emailAddress, user.password);
+                    this.authService.setAuthorization(user.fullName, user.password);
                     this.api.get('users/me').subscribe(function (authenticator) {
                         _this.authService.storeAuthorization(authenticator, remember);
                         _this.goHome();
@@ -75,6 +80,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     return this.authService.getAuthenticator();
                 };
                 UserService.prototype.update = function (fullName, user) {
+                    var _this = this;
                     var data = {
                         fullName: user.fullName,
                         postcode: user.postcode,
@@ -84,6 +90,7 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                         roles: user.roles
                     };
                     this.api.put('users/' + fullName, data).subscribe(function (data) {
+                        _this.updateViews.emit();
                     }, function (error) {
                         alert('Het updaten is mislukt');
                     });
