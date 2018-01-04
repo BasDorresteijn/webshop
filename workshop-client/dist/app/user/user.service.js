@@ -108,6 +108,11 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                         _this.login(user, false);
                     });
                 };
+                UserService.prototype.deleteAccount = function () {
+                    this.api.delete("users").subscribe();
+                    this.authService.deleteAuthorization();
+                    this.router.navigate([""]);
+                };
                 UserService = __decorate([
                     core_1.Injectable(),
                     __metadata("design:paramtypes", [api_service_1.ApiService,

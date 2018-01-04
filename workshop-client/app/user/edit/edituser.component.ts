@@ -46,4 +46,9 @@ export class EditUserComponent
     {
         this.userService.putUser(this.user)
     }
+
+    deleteaccount()
+    {
+        this.userService.deleteAccount();
+    }
 }

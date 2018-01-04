@@ -24,7 +24,7 @@ export class ProductListComponent
     }
 
     ngOnInit() {
-        // this.productService.getUpdateViews().subscribe( () => this.getProductList())
+        this.productService.getUpdateViews().subscribe( () => this.getProductList())
     }
     
     private getProductList()

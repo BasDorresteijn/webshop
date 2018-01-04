@@ -56,6 +56,9 @@ System.register(["@angular/core", "../user.service", "@angular/forms"], function
                 EditUserComponent.prototype.editUser = function () {
                     this.userService.putUser(this.user);
                 };
+                EditUserComponent.prototype.deleteaccount = function () {
+                    this.userService.deleteAccount();
+                };
                 EditUserComponent = __decorate([
                     core_1.Component({
                         selector: 'edit-user',

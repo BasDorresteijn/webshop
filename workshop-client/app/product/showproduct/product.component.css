@@ -1,26 +1,42 @@
 .productimg {
-    float: right;
-    width: 160px;
-    height: 160px;
+    max-width: 200px;
+    max-height: 150px;
 }
+
+.imgwidth {
+    width: 40%;
+    float: right;
+}
+
 
 .text {
     width: 50%;
     float: left;
 }
 
-mat-card-actions{
+#button{
     display: table;
-    float: left;
+    overflow: auto;
+    content: "";
 }
 
 mat-card {
     content: "";
     display: table;
-    width: 450px;
+    height: 250px;
+}
+
+.widht {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.products {
+    width: 500px;
     float: left;
-    margin-left: 12px;
-    margin-right: 12px;
+    margin-left: 16px; 
+    margin-right: 16px;    
 }
 
 mat-card-actions {

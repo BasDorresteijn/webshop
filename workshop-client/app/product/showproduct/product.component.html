@@ -1,9 +1,10 @@
-<div>
+<mat-card class=widht>
     <h1>De producten</h1>
     
     <div *ngIf="hasdata">
         <div *ngFor="let product of producten">
-            <mat-card>
+            <div class="products">
+            <mat-card class="clear">
                 <mat-card-header>
                     <mat-card-title>
                         <h1>{{product.productName}}</h1>
@@ -17,14 +18,15 @@
                         Op voorraad {{product.available}} stuks <br>
                     </p>
                 </mat-card-content>
-                <img class=productimg src="../../../assets/{{product.productName}}.jpg" alt="Afbeelding van {{product.productName}}"> 
-                <mat-card-actions>
-                    <button mat-raised-button type="submit" class="mat-primary" [disabled]="product.available < 1"
-                    (click) = "buyProduct(product)">Koop dit product!</button>
-                </mat-card-actions>
-            </mat-card>           
+                <div class="imgwidth">
+                <img class=productimg src="../../../assets/{{product.productName}}.png" alt="Afbeelding van {{product.productName}}"> 
+                </div>
+                    <button id="button" mat-raised-button type="submit" class="mat-primary" [disabled]="product.available < 1"
+                    (click) = "buyProduct(product)" id="button">Koop dit product!</button>
+            </mat-card>    
+            </div>       
         </div>
     </div>
     
-</div>
+</mat-card>
  

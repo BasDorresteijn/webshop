@@ -1,9 +1,9 @@
-<div class="completeList">
+<mat-card class="completeList">
 <h1>Producten</h1>
 
 <div class="product-list mat-elevation-z8" *ngIf="hasData()">
 
-    <mat-table #table [dataSource]="dataSource">
+    <mat-table #table [dataSource]="dataSource" class="productlist">
 
         <ng-container matColumnDef="productname">
             <mat-header-cell *matHeaderCellDef>Product naam</mat-header-cell>
@@ -46,4 +46,4 @@
 
 </div>
 
-</div>
+</mat-card>

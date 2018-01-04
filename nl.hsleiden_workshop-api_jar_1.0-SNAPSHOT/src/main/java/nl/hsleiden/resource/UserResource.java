@@ -84,11 +84,9 @@ public class UserResource
     }
     
     @DELETE
-    @Path("/{fullname}")
-    @RolesAllowed("ADMIN")
-    public void delete(@PathParam("fullname") String fullname)
+    public void delete(@Auth User user)
     {
-        service.delete(fullname);
+        service.delete(user.getFullName());
     }
     
     @GET

@@ -1,0 +1,10 @@
+mat-card {
+    width: 300px;
+    margin: auto;
+}
+
+.img {
+    display: block;
+    width: 160px;
+    margin: auto;
+}

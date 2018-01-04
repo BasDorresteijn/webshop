@@ -137,4 +137,10 @@ export class UserService
             }
         );
     }
+
+    public deleteAccount() {
+        this.api.delete<void>("users").subscribe();
+        this.authService.deleteAuthorization();
+        this.router.navigate([""])
+    }
 }

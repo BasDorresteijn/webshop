@@ -1,3 +1,7 @@
+mat-card {
+    width: 300px;
+    margin: auto;
+}
 
 md-card
 {
@@ -14,4 +18,10 @@ md-card-content
 md-input-container
 {
     width: 100%;
+}
+
+.img {
+    display: block;
+    width: 160px;
+    padding: 12px, auto;
 }

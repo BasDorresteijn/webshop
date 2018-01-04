@@ -10,11 +10,12 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, api_service_1, authorization_service_1, ProductService;
+    var core_1, router_1, api_service_1, authorization_service_1, core_2, ProductService;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
+                core_2 = core_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
@@ -28,15 +29,14 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
         ],
         execute: function () {
             ProductService = /** @class */ (function () {
-                // private updateViews: EventEmitter<null>;
                 function ProductService(api, authService, router) {
                     this.api = api;
                     this.authService = authService;
                     this.router = router;
-                    // this.updateViews = new EventEmitter();
+                    this.updateViews = new core_2.EventEmitter();
                 }
                 ProductService.prototype.getUpdateViews = function () {
-                    // return this.updateViews;
+                    return this.updateViews;
                 };
                 ProductService.prototype.getAll = function () {
                     // this.updateViews.emit();
@@ -109,8 +109,10 @@ System.register(["@angular/core", "@angular/router", "../shared/api.service", ".
                     });
                 };
                 ProductService.prototype.removeProduct = function (product) {
-                    // this.updateViews.emit();
-                    this.api.delete("products/" + product.productName).subscribe();
+                    var _this = this;
+                    this.api.delete("products/" + product.productName).subscribe(function (data) {
+                        _this.updateViews.emit();
+                    });
                 };
                 ProductService = __decorate([
                     core_1.Injectable(),

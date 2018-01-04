@@ -32,7 +32,8 @@ System.register(["@angular/core", "./list.datasource", "../product.service"], fu
                     this.getProductList();
                 }
                 ProductListComponent.prototype.ngOnInit = function () {
-                    // this.productService.getUpdateViews().subscribe( () => this.getProductList())
+                    var _this = this;
+                    this.productService.getUpdateViews().subscribe(function () { return _this.getProductList(); });
                 };
                 ProductListComponent.prototype.getProductList = function () {
                     var _this = this;

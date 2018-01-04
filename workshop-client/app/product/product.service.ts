@@ -13,17 +13,17 @@ import { EventEmitter } from '@angular/core';
 export class ProductService
 {
     private selectedProduct?: Product;
-    // private updateViews: EventEmitter<null>;
+    private updateViews: EventEmitter<null>;
 
     constructor(private api: ApiService,
         private authService: AuthorizationService,
         private router: Router)
     {        
-        // this.updateViews = new EventEmitter();
+        this.updateViews = new EventEmitter();
     }
 
     public getUpdateViews() {
-        // return this.updateViews;
+        return this.updateViews;
     }
 
     public getAll(): Observable<Product[]>
@@ -117,9 +117,10 @@ export class ProductService
     }
 
     public removeProduct(product : Product) {
-        // this.updateViews.emit();
         this.api.delete<void>("products/" + product.productName).subscribe(
-
+            data => {
+                this.updateViews.emit();
+            }
         )
     }
 }

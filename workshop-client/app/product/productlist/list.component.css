@@ -1,5 +1,8 @@
 .completeList {
     overflow: auto;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .selected {
@@ -8,8 +11,18 @@
 
 #floatright {
     float: right;
+    margin: 8px;
 }
 
 #floatleft {
     float: left;
+    margin: 8px;
+}
+
+mat-cell {
+    margin-right: 10px;
+}
+
+.productlist {
+    max-height: 450px;
 }

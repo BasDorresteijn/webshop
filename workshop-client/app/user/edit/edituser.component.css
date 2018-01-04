@@ -15,3 +15,7 @@ md-input-container
 {
     width: 100%;
 }
+
+#delete {
+    float: right;
+}

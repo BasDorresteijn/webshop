@@ -1,13 +1,13 @@
 {
-  "name": "WorkshopClient",
-  "description": "HSLeiden workshop demo application",
+  "name": "WebshopClient",
+  "description": "HSLeiden webshop IPRWC",
   "version": "1.0.0",
   "license": "WTFPL",
   
   "repository":
   {
     "type": "git",
-    "url": "git://github.com/pvvliet/workshop-client.git"
+    "url": "https://github.com/BasDorresteijn/webshop.git"
   },
   
   "keywords": [
@@ -18,7 +18,7 @@
     "browser"
   ],
   
-  "author": "Peter van Vliet",
+  "author": "Bas Dorresteijn",
   "contributors": [],
   
   "dependencies":
