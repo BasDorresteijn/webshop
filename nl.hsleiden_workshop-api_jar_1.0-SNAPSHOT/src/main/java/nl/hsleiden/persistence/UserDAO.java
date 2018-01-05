@@ -13,7 +13,7 @@ import nl.hsleiden.model.User;
 
 /**
  *
- * @author Peter van Vliet
+ * @author Bas Dorresteijn
  */
 @Singleton
 public class UserDAO

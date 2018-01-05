@@ -9,7 +9,7 @@ import nl.hsleiden.persistence.UserDAO;
 
 /**
  *
- * @author Peter van Vliet
+ * @author Bas Dorresteijn
  */
 @Singleton
 public class UserService extends BaseService<User>

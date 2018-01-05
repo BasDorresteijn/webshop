@@ -9,10 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * Meer informatie over validatie:
- *  http://hibernate.org/validator/
- * 
- * @author Peter van Vliet
+ * @author Bas Dorresteijn
  */
 public class User implements Principal
 {

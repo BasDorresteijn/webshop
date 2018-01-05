@@ -5,7 +5,7 @@
 
     <mat-table #table [dataSource]="dataSource" class="productlist">
 
-        <ng-container matColumnDef="productname">
+        <ng-container matColumnDef="productname" class="productname">
             <mat-header-cell *matHeaderCellDef>Product naam</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.productName }}</mat-cell>
         </ng-container>

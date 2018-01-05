@@ -21,10 +21,7 @@ import nl.hsleiden.model.User;
 import nl.hsleiden.service.UserService;
 
 /**
- * Meer informatie over resources:
- *  https://jersey.java.net/documentation/latest/user-guide.html#jaxrs-resources
- * 
- * @author Peter van Vliet
+ * @author Bas Dorresteijn
  */
 @Singleton
 @Path("/users")
