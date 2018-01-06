@@ -59,12 +59,12 @@ export class CartListComponent
     }
 
     public emptycart() {
-        this.cartService.goHome();
+        // this.cartService.goHome();
         this.cartService.emptycart();
     }
 
     public paycart() {
-        this.cartService.goHome();
+        // this.cartService.goHome();
         alert("Dat is dan: €" + this.totalPrice);
         this.cartService.paycart();
     }

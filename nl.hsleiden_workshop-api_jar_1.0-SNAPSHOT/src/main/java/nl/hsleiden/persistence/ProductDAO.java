@@ -122,7 +122,7 @@ public class ProductDAO {
             PreparedStatement setAvailable = conn.prepareStatement("UPDATE product SET available = available + ? WHERE productname=?");
             setAvailable.setString(2, productname);
             setAvailable.setInt(1, add);
-            setAvailable.executeQuery();
+            setAvailable.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -15,11 +15,13 @@ import nl.hsleiden.persistence.UserDAO;
 public class UserService extends BaseService<User>
 {
     private final UserDAO dao;
+    private final CartService cartService;
     
     @Inject
-    public UserService(UserDAO dao)
+    public UserService(UserDAO dao, CartService cartService)
     {
         this.dao = dao;
+        this.cartService = cartService;
     }
     
     public Collection<User> getAll()
@@ -80,7 +82,7 @@ public class UserService extends BaseService<User>
     {
         // Controleren of deze gebruiker wel bestaat
         User user = get(fullname);
-        
+        cartService.removeCart(user, false);
         dao.delete(fullname);
     }
     

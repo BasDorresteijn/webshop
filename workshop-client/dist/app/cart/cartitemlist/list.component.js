@@ -58,11 +58,11 @@ System.register(["@angular/core", "./list.datasource", "../cart.service"], funct
                     this.cartService.unbuyProduct(product);
                 };
                 CartListComponent.prototype.emptycart = function () {
-                    this.cartService.goHome();
+                    // this.cartService.goHome();
                     this.cartService.emptycart();
                 };
                 CartListComponent.prototype.paycart = function () {
-                    this.cartService.goHome();
+                    // this.cartService.goHome();
                     alert("Dat is dan: €" + this.totalPrice);
                     this.cartService.paycart();
                 };

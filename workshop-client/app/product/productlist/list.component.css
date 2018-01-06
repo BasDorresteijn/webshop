@@ -23,6 +23,7 @@ mat-cell {
     margin-right: 10px;
 }
 
-.productlist {
-    max-height: 450px;
+mat-table {
+    overflow: auto;
+    max-height: 500px;
 }
