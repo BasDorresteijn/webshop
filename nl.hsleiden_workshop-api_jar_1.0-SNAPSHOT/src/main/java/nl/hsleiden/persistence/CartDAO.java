@@ -48,6 +48,8 @@ public class CartDAO {
             while(rs.next()) {
                 cart.addProduct(productDAO.getProduct(rs.getString(2)));
             }
+            getCart.close();
+            rs.close();
             return cart;
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,6 +70,8 @@ public class CartDAO {
                     carts.add(getCart(rs.getString(1)));
                 }
             }
+            getCarts.close();
+            rs.close();
             return carts;
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,7 +86,10 @@ public class CartDAO {
             getPrice.setString(1, user.getFullName());
             ResultSet rs = getPrice.executeQuery();
             rs.next();
-            return rs.getDouble(1);
+            double price = rs.getDouble(1);
+            getPrice.close();
+            rs.close();
+            return price;
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -96,6 +103,7 @@ public class CartDAO {
             addProductToCart.setString(1, fullname);
             addProductToCart.setString(2, product);
             addProductToCart.execute();
+            addProductToCart.close();
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -121,6 +129,8 @@ public class CartDAO {
             while(rs.next()) {
                 products.add(rs.getString(1));
             }
+            getProducts.close();
+            rs.close();
             return products;
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,6 +146,8 @@ public class CartDAO {
             ResultSet rs = addAvailable.executeQuery();
             rs.next();
             productDAO.setAvailable(product, rs.getInt(1));
+            addAvailable.close();
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -143,12 +155,14 @@ public class CartDAO {
     
     private void addSoldAmount(String fullname, String product) {
         try {
-            PreparedStatement addAvailable = conn.prepareStatement("SELECT COUNT(product_productname) FROM cart WHERE user_fullname = ? AND product_productname = ?");
-            addAvailable.setString(1, fullname);
-            addAvailable.setString(2, product);
-            ResultSet rs = addAvailable.executeQuery();
+            PreparedStatement addSoldAmount = conn.prepareStatement("SELECT COUNT(product_productname) FROM cart WHERE user_fullname = ? AND product_productname = ?");
+            addSoldAmount.setString(1, fullname);
+            addSoldAmount.setString(2, product);
+            ResultSet rs = addSoldAmount.executeQuery();
             rs.next();
             productDAO.setSoldAmount(product, rs.getInt(1));
+            addSoldAmount.close();
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -167,6 +181,7 @@ public class CartDAO {
             PreparedStatement removeCart = conn.prepareStatement("DELETE from cart where user_fullname = ?");
             removeCart.setString(1, fullname);
             removeCart.execute();
+            removeCart.close();
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -183,6 +198,10 @@ public class CartDAO {
             PreparedStatement removeProductFromCart2 = conn.prepareStatement("DELETE from cart where id = ?");
             removeProductFromCart2.setInt(1, rs.getInt(1));
             removeProductFromCart2.execute();
+            
+            removeProductFromCart.close();
+            removeProductFromCart2.close();
+            rs.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);

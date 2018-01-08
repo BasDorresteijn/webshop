@@ -46,6 +46,8 @@ public class ProductDAO {
                 p.setSoldAmount(rs.getInt(5));
                 producten.add(p);
             }
+            getProducten.close();
+            rs.close();
             return producten;
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,6 +69,8 @@ public class ProductDAO {
                 p.setAvailable(rs.getInt(4));
                 p.setSoldAmount(rs.getInt(5));
             }
+            getProduct.close();
+            rs.close();
             return p;
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,6 +87,7 @@ public class ProductDAO {
             insertProduct.setInt(4, product.getAvailable());
             insertProduct.setInt(5, product.getSoldAmount());
             insertProduct.execute();
+            insertProduct.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -101,6 +106,7 @@ public class ProductDAO {
             System.out.println("wowowowow");
             System.out.println(product.getAvailable());
             updateProduct.execute();
+            updateProduct.close();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -112,6 +118,7 @@ public class ProductDAO {
             updateProduct.setInt(1, product.getAvailable());         
             updateProduct.setString(2, productname);
             updateProduct.execute();
+            updateProduct.close();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -123,6 +130,7 @@ public class ProductDAO {
             setAvailable.setString(2, productname);
             setAvailable.setInt(1, add);
             setAvailable.execute();
+            setAvailable.close();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -130,10 +138,11 @@ public class ProductDAO {
     
     public void setSoldAmount(String productname, int soldAmount) {
         try {
-            PreparedStatement setAvailable = conn.prepareStatement("UPDATE product SET soldAmount = soldAmount + ? WHERE productname=?");
-            setAvailable.setString(2, productname);
-            setAvailable.setInt(1, soldAmount);
-            setAvailable.executeQuery();
+            PreparedStatement setSoldAmount = conn.prepareStatement("UPDATE product SET soldAmount = soldAmount + ? WHERE productname=?");
+            setSoldAmount.setString(2, productname);
+            setSoldAmount.setInt(1, soldAmount);
+            setSoldAmount.execute();
+            setSoldAmount.close();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -144,6 +153,7 @@ public class ProductDAO {
             PreparedStatement removeProduct = conn.prepareStatement("delete from product where productname = ?");
             removeProduct.setString(1, productname);
             removeProduct.execute();
+            removeProduct.close();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

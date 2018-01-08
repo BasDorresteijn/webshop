@@ -32,7 +32,8 @@ public class UserDAO
         ArrayList<User> users;
         try {
             users = new ArrayList<>();
-            ResultSet rs = conn.prepareStatement("select * from webshop_user").executeQuery();
+            PreparedStatement getUsers = conn.prepareStatement("select * from webshop_user");
+            ResultSet rs = getUsers.executeQuery();
             while(rs.next()) {
                 User user = new User();
                 user.setFullName(rs.getString(1));
@@ -47,6 +48,8 @@ public class UserDAO
                 }
                 users.add(user);
             }
+            getUsers.close();
+            rs.close();
             return users;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,6 +75,8 @@ public class UserDAO
                     user.setRoles(new String[] { "GUEST" });
                 }
             }
+            getUser.close();
+            rs.close();
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,6 +102,8 @@ public class UserDAO
                     user.setRoles(new String[] { "GUEST" });
                 }
             }
+            getUser.close();
+            rs.close();
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,7 +113,7 @@ public class UserDAO
     
     public User getByFullname(String fullname) {
         try {
-            User user = new User();;
+            User user = new User();
             PreparedStatement getUser = conn.prepareStatement("select * from webshop_user where fullname = ? ");
             getUser.setString(1, fullname);
             ResultSet rs = getUser.executeQuery();
@@ -122,6 +129,8 @@ public class UserDAO
                     user.setRoles(new String[] { "GUEST" });
                 }
             }
+            getUser.close();
+            rs.close();
             return user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -145,6 +154,7 @@ public class UserDAO
             }
             insertUser.setBoolean(6, admin);
             insertUser.execute();
+            insertUser.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -161,7 +171,8 @@ public class UserDAO
             updateUser.setString(4, user.getEmailAddress());
             updateUser.setString(5, user.getPassword());
             updateUser.setString(6, fullName);
-            updateUser.executeQuery();
+            updateUser.execute();
+            updateUser.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -173,6 +184,7 @@ public class UserDAO
             updateRoles.setBoolean(1, admin);
             updateRoles.setString(2, fullName);
             updateRoles.execute();
+            updateRoles.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -183,6 +195,7 @@ public class UserDAO
             PreparedStatement deleteUser = conn.prepareStatement("delete from webshop_user where fullname = ? ");
             deleteUser.setString(1, fullName);
             deleteUser.execute();
+            deleteUser.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
