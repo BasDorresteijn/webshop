@@ -18,3 +18,11 @@ Url's
 84.83.202.158:8080/product/edit  
 84.83.202.158:8080/cart  
 84.83.202.158:8080/me  
+
+Account's (hoofdlettergevoelig)  
+KeesJan - ikbenbaas    
+Piet11 - hetispiet  
+   
+Admin accounts (hoofdlettergevoelig)  
+deBaasss - neee4455  
+Vries9 - neetochniet  
