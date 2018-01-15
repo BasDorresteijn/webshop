@@ -8,7 +8,7 @@ Back-end: https://github.com/pvvliet/workshop-api.git
 
 Mocht webshop aanstaan draait deze op 84.83.202.158:8080
 
-Url's  
+Uri's  
 84.83.202.158:8080  
 84.83.202.158:8080/register  
 84.83.202.158:8080/login  
@@ -18,6 +18,31 @@ Url's
 84.83.202.158:8080/product/edit  
 84.83.202.158:8080/cart  
 84.83.202.158:8080/me  
+
+Api
+84.83.202.158:8080/api  
+84.83.202.158:8080/api/carts  
+84.83.202.158:8080/api/carts  
+84.83.202.158:8080/api/carts/addProduct  
+84.83.202.158:8080/api/carts/buy  
+84.83.202.158:8080/api/carts/price  
+84.83.202.158:8080/api/carts/remove  
+84.83.202.158:8080/api/carts/{fullname}  
+84.83.202.158:8080/api/products  
+84.83.202.158:8080/api/products  
+84.83.202.158:8080/api/products  
+84.83.202.158:8080/api/products/admin  
+84.83.202.158:8080/api/products/buy  
+84.83.202.158:8080/api/products/{productname}  
+84.83.202.158:8080/api/products/{productname}  
+84.83.202.158:8080/api/users  
+84.83.202.158:8080/api/users  
+84.83.202.158:8080/api/users  
+84.83.202.158:8080/api/users/admin  
+84.83.202.158:8080/api/users/me  
+84.83.202.158:8080/api/users/me  
+84.83.202.158:8080/api/users/{fullname}  
+84.83.202.158:8080/api/users/{fullname}  
 
 Account's (hoofdlettergevoelig)  
 KeesJan - ikbenbaas    
