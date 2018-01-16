@@ -8,18 +8,7 @@ Back-end: https://github.com/pvvliet/workshop-api.git
 
 Mocht webshop aanstaan draait deze op 84.83.202.158:8080
 
-Uri's  
-84.83.202.158:8080  
-84.83.202.158:8080/register  
-84.83.202.158:8080/login  
-84.83.202.158:8080/users  
-84.83.202.158:8080/products  
-84.83.202.158:8080/product/add  
-84.83.202.158:8080/product/edit  
-84.83.202.158:8080/cart  
-84.83.202.158:8080/me  
-
-Api  
+Uri's api  
 84.83.202.158:8080/api  
 84.83.202.158:8080/api/carts  
 84.83.202.158:8080/api/carts  
