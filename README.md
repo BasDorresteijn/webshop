@@ -9,29 +9,29 @@ Back-end: https://github.com/pvvliet/workshop-api.git
 Mocht webshop aanstaan draait deze op 84.83.202.158:8080
 
 Uri's api  
-84.83.202.158:8080/api  
-84.83.202.158:8080/api/carts  
-84.83.202.158:8080/api/carts  
-84.83.202.158:8080/api/carts/addProduct  
-84.83.202.158:8080/api/carts/buy  
-84.83.202.158:8080/api/carts/price  
-84.83.202.158:8080/api/carts/remove  
-84.83.202.158:8080/api/carts/{fullname}  
-84.83.202.158:8080/api/products  
-84.83.202.158:8080/api/products  
-84.83.202.158:8080/api/products  
-84.83.202.158:8080/api/products/admin  
-84.83.202.158:8080/api/products/buy  
-84.83.202.158:8080/api/products/{productname}  
-84.83.202.158:8080/api/products/{productname}  
-84.83.202.158:8080/api/users  
-84.83.202.158:8080/api/users  
-84.83.202.158:8080/api/users  
-84.83.202.158:8080/api/users/admin  
-84.83.202.158:8080/api/users/me  
-84.83.202.158:8080/api/users/me  
-84.83.202.158:8080/api/users/{fullname}  
-84.83.202.158:8080/api/users/{fullname}  
+    GET     84.83.202.158:8080/api/     
+    DELETE  84.83.202.158:8080/api/carts  
+    GET     84.83.202.158:8080/api/carts  
+    POST    84.83.202.158:8080/api/carts/addProduct  
+    DELETE  84.83.202.158:8080/api/carts/buy  
+    GET     84.83.202.158:8080/api/carts/price  
+    DELETE  84.83.202.158:8080/api/carts/remove  
+    GET     84.83.202.158:8080/api/carts/{fullname}  
+    GET     84.83.202.158:8080/api/products  
+    POST    84.83.202.158:8080/api/products  
+    PUT     84.83.202.158:8080/api/products  
+    GET     84.83.202.158:8080/api/products/admin  
+    PUT     84.83.202.158:8080/api/products/buy  
+    DELETE  84.83.202.158:8080/api/products/{productname}  
+    GET     84.83.202.158:8080/api/products/{productname}  
+    DELETE  84.83.202.158:8080/api/users  
+    GET     84.83.202.158:8080/api/users  
+    POST    84.83.202.158:8080/api/users  
+    GET     84.83.202.158:8080/api/users/admin  
+    GET     84.83.202.158:8080/api/users/me  
+    PUT     84.83.202.158:8080/api/users/me  
+    GET     84.83.202.158:8080/api/users/{fullname}  
+    PUT     84.83.202.158:8080/api/users/{fullname}   
 
 Account's (hoofdlettergevoelig)  
 KeesJan - ikbenbaas    
