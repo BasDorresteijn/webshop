@@ -6,9 +6,10 @@ De opzet van het project was al gegeven.
 Front-end: https://github.com/pvvliet/workshop-client.git  
 Back-end: https://github.com/pvvliet/workshop-api.git
 
-Mocht webshop aanstaan draait deze op 84.83.202.158:8080
+IP-adres webshop 84.83.202.158:8080  
+# webshop is uit
 
-Uri's api  
+Uri's api  
     GET     84.83.202.158:8080/api/     
     DELETE  84.83.202.158:8080/api/carts  
     GET     84.83.202.158:8080/api/carts  
